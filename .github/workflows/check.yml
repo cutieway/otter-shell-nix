@@ -1,0 +1,32 @@
+name: check
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  flake-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: NixOS/nix-installer-action@00b25e1d0d56f56e90ee9814fb4385c721348f74 # main, 2026-07-13
+      - name: Validate clean-checkout source metadata
+        run: |
+          nix develop .#bootstrap --command python3 tools/check-source-compat.py
+          nix develop .#bootstrap --command python3 tools/generate-zig-locks.py --check
+      - name: Check flake
+        run: |
+          nix flake check --show-trace
+          nix eval .#packages.aarch64-linux.otter-bar.drvPath --raw
+      - name: Build representative package
+        run: nix build .#otter-bar .#otter-term --show-trace
+      - name: Verify release manifest
+        run: nix develop .#bootstrap --command python3 tools/check-manifest.py
