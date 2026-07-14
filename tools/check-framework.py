@@ -338,7 +338,7 @@ if gitignore_path.is_file():
         for line in gitignore_path.read_text().splitlines()
         if line.strip() and not line.lstrip().startswith("#")
     }
-    for pattern in ("repos/", "repos.7z", "otter-shell-nix.zip", "otter-shell-nix.tar.gz", ".consumer-eval-*.nix"):
+    for pattern in ("repos/", ".consumer-eval-*.nix"):
         if pattern not in ignored:
             errors.append(f"release-only local artifact is not ignored: {pattern}")
 

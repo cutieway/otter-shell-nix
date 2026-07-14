@@ -195,7 +195,9 @@ The Home Manager module installs enabled components and creates user services
 for daemon-style components. It expects the overlay, or explicit package
 options. The NixOS module enables common system prerequisites such as PipeWire,
 UPower, Polkit, the privileged `pkexec` wrapper, and the PAM service for
-`otter-lock`.
+`otter-lock`. It supports both older NixOS releases where enabling Polkit
+always creates that wrapper and newer releases where the wrapper has a
+separate option.
 
 These are two separate switches: `services.otter-shell.enable` configures the
 NixOS prerequisites, while `programs.otter-shell.enable` installs and starts the
@@ -274,8 +276,8 @@ backend and its local-socket client are currently limited to `x86_64-linux`.
 - Commands such as `xdg-open`, `wl-copy`, and `hyprctl` are supplied through
   package-local wrappers where the source uses them. `pkexec` deliberately
   remains a PATH lookup so NixOS resolves the privileged wrapper at
-  `/run/wrappers/bin/pkexec`; `services.otter-shell.enablePolkit` enables both
-  Polkit and `security.polkit.enablePkexecWrapper`.
+  `/run/wrappers/bin/pkexec`; `services.otter-shell.enablePolkit` enables Polkit
+  and, on releases that expose it separately, the `pkexec` wrapper option.
 - Runtime integration varies by compositor and should be tested component by
   component before enabling the full bundle.
 

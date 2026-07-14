@@ -5,7 +5,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    otter-shell.url = "github:YOUR-NAME/otter-shell-nix";
+    otter-shell.url = "github:cutieway/otter-shell-nix";
   };
 
   outputs = { nixpkgs, home-manager, otter-shell, ... }: {

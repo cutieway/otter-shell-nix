@@ -157,8 +157,9 @@ live NixOS/Home Manager testing.
 - Executables with ordinary command-line dependencies are wrapped with a local
   `PATH`. Absolute non-privileged commands in settings/recorder sources are
   patched to Nix-store paths. `pkexec` is intentionally not patched or prefixed:
-  NixOS must resolve `/run/wrappers/bin/pkexec`, and the NixOS module enables the
-  dedicated Polkit `pkexec` wrapper option.
+  NixOS must resolve `/run/wrappers/bin/pkexec`. The NixOS module enables the
+  dedicated wrapper option when the host release exposes one; older releases
+  create the wrapper as part of enabling Polkit itself.
 - `otter-rec-kms-server` cannot receive capabilities by mutating its Nix-store
   file. The NixOS module exposes an opt-in `security.wrappers` capability
   wrapper instead.

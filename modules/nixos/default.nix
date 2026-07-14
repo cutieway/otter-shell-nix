@@ -1,6 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, options, pkgs, ... }:
 let
   cfg = config.services.otter-shell;
+  hasSeparatePkexecOption =
+    lib.hasAttrByPath [ "security" "polkit" "enablePkexecWrapper" ] options;
 in
 {
   options.services.otter-shell = {
@@ -51,11 +53,16 @@ in
     })
     (lib.mkIf cfg.enableUPower { services.upower.enable = true; })
     (lib.mkIf cfg.enableNetworkManager { networking.networkmanager.enable = true; })
-    (lib.mkIf cfg.enablePolkit {
-      security.polkit.enable = true;
-      # pkexec is a privileged NixOS wrapper, not a usable immutable store path.
-      security.polkit.enablePkexecWrapper = lib.mkDefault true;
-    })
+    (lib.mkIf cfg.enablePolkit (
+      {
+        security.polkit.enable = true;
+      }
+      // lib.optionalAttrs hasSeparatePkexecOption {
+        # Recent NixOS releases expose this separately. Older releases create
+        # the pkexec wrapper whenever Polkit is enabled.
+        security.polkit.enablePkexecWrapper = lib.mkDefault true;
+      }
+    ))
     (lib.mkIf cfg.enableLockPam { security.pam.services.otter-lock = { }; })
     (lib.mkIf (cfg.enableRecorderKmsWrapper && cfg.recorderPackage != null) {
       # The package also contains an unprivileged binary with this name. Point
