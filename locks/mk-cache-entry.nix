@@ -36,6 +36,7 @@ runCommandLocal "zig-cache-${builtins.substring 0 24 zigHash}.tar.gz"
     ''}
     ${lib.optionalString (!sourceIsArchive) ''
       tar \
+        --hard-dereference \
         --sort=name \
         --mtime=@1 \
         --owner=0 \

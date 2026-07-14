@@ -39,7 +39,9 @@ $ZIG_GLOBAL_CACHE_DIR/p -> /nix/store/...-otter-zig-deps
 
 There is no extra `p/deps` directory. Zig 0.16 cache entries are archives named
 `<zig-package-hash>.tar.gz`. Missing lock files or fixed-output sources produce
-an intentional, early failure naming the missing data.
+an intentional, early failure naming the missing data. Source trees are archived
+with hard links dereferenced because Zig's tar reader does not accept hard-link
+records and Nix stores may independently deduplicate identical files.
 
 ## 4. Versions
 

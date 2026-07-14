@@ -343,11 +343,14 @@ if gitignore_path.is_file():
             errors.append(f"release-only local artifact is not ignored: {pattern}")
 
 builder_text = (root / "nix/lib/mk-zig-package.nix").read_text()
+cache_entry_text = (root / "locks/mk-cache-entry.nix").read_text()
 module_text = (root / "modules/nixos/default.nix").read_text()
 home_module_text = (root / "modules/home-manager/default.nix").read_text()
 
 if 'ln -s ${externalDeps} "$ZIG_GLOBAL_CACHE_DIR/p"' not in builder_text:
     errors.append("Zig package cache is not linked directly at $ZIG_GLOBAL_CACHE_DIR/p")
+if "--hard-dereference" not in cache_entry_text:
+    errors.append("Zig cache archives may contain hard-link entries unsupported by Zig")
 if "$ZIG_GLOBAL_CACHE_DIR/p/deps" in builder_text or '"$ZIG_GLOBAL_CACHE_DIR/p/deps"' in packages_text:
     errors.append("obsolete zon2nix p/deps cache layout is present")
 if "dontUnpack = true" in builder_text:

@@ -48,7 +48,9 @@ $ZIG_GLOBAL_CACHE_DIR/p
 Zig 0.16 stores packages as `p/<build.zig.zon-hash>.tar.gz`, not as the
 hash-named source directories emitted by older `zon2nix` versions. Each fixed
 source is therefore converted by `mk-cache-entry.nix`; that conversion fails if
-either the Zig hash or the expected cache archive name differs.
+either the Zig hash or the expected cache archive name differs. The conversion
+also dereferences hard links so its output is independent of whether the host
+Nix store has deduplicated identical source files.
 
 Do not create a `p/deps` child. The generated link farms expose the `.tar.gz`
 archives directly beneath `p`.
