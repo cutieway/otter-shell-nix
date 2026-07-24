@@ -18,6 +18,14 @@ jobs:
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - uses: NixOS/nix-installer-action@00b25e1d0d56f56e90ee9814fb4385c721348f74 # main, 2026-07-13
+      - name: Debug - diff generated vs committed repositories.nix
+        run: |
+          cp nix/repositories.nix /tmp/repos-committed.nix
+          nix develop .#bootstrap --command python3 tools/generate-repositories.py
+          cp nix/repositories.nix /tmp/repos-generated.nix
+          git checkout -- nix/repositories.nix
+          echo "=== DIFF ==="
+          diff -u /tmp/repos-committed.nix /tmp/repos-generated.nix || true
       - name: Validate clean-checkout source metadata
         run: |
           nix develop .#bootstrap --command python3 tools/check-source-compat.py
