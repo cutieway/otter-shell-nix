@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-      - uses: NixOS/nix-installer-action@00b25e1d0d56f56e90ee9814fb4385c721348f74 # main, 2026-07-13
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: NixOS/nix-installer-action@62c1943b776c509394b550f3f983adc14e9212d6 # main, 2026-07-13
       - name: Validate clean-checkout source metadata
         run: |
           nix develop .#bootstrap --command python3 tools/check-source-compat.py
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 90
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-      - uses: NixOS/nix-installer-action@00b25e1d0d56f56e90ee9814fb4385c721348f74 # main, 2026-07-13
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: NixOS/nix-installer-action@62c1943b776c509394b550f3f983adc14e9212d6 # main, 2026-07-13
       - name: Build representative aarch64 packages
         run: nix build .#otter-bar .#otter-term --show-trace
