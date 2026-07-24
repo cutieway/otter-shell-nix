@@ -3,14 +3,23 @@ set -euo pipefail
 
 root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$root"
-api='https://git.pika-os.com/api/v1/orgs/otter-shell/repos?limit=100'
 
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 
-curl -fsSL "$api" \
-  | jq -r '.[].name | select(startswith("otter-"))' \
-  | sort -u > "$tmp/upstream"
+# Fetch all pages from the Forgejo API.  Forgejo returns an empty array [] for
+# exhausted pages, so loop until we get one.
+page=1
+api_base='https://git.pika-os.com/api/v1/orgs/otter-shell/repos'
+while :; do
+  data="$(curl -fsSL "${api_base}?limit=50&page=${page}")"
+  count="$(jq 'length' <<< "$data")"
+  [[ "$count" -eq 0 ]] && break
+  jq -r '.[].name | select(startswith("otter-"))' <<< "$data" \
+    >> "$tmp/upstream_pages"
+  page=$((page + 1))
+done
+sort -u -o "$tmp/upstream" "$tmp/upstream_pages"
 
 python3 - <<'PY' | sort -u > "$tmp/generated"
 from pathlib import Path

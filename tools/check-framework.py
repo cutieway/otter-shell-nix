@@ -9,6 +9,8 @@ root = Path(__file__).resolve().parents[1]
 repos_text = (root / "nix/repositories.nix").read_text()
 specs_text = (root / "nix/package-specs.nix").read_text()
 packages_text = (root / "nix/packages.nix").read_text()
+maps_text = (root / "nix/lib/dependency-maps.nix").read_text()
+fixups_text = (root / "nix/lib/package-source-fixups.nix").read_text()
 flake_text = (root / "flake.nix").read_text()
 repos = set(re.findall(r'^\s*"(otter-[^"]+)"\s*=\s*\{', repos_text, re.M))
 specs = set(re.findall(r'^\s*"(otter-[^"]+)"\s*=\s*\{', specs_text, re.M))
@@ -103,17 +105,17 @@ for zig_hash, owners in sorted(missing_lock_sources.items()):
         f"(required by {', '.join(sorted(owners))})"
     )
 
-known_libraries = set(re.findall(r'(?<![A-Za-z0-9_.+-])"?([A-Za-z0-9_.+-]+)"?\s*=\s*(?:\{|null)', packages_text))
+known_libraries = set(re.findall(r'(?<![A-Za-z0-9_.+-])"?([A-Za-z0-9_.+-]+)"?\s*=\s*(?:\{|null)', maps_text))
 used_libraries: set[str] = set()
 for block in re.findall(r'systemLibraries = \[([^]]*)\];', repos_text):
     used_libraries.update(re.findall(r'"([^"]+)"', block))
 for library in sorted(used_libraries - known_libraries):
-    errors.append(f"system library has no mapping in nix/packages.nix: {library}")
+    errors.append(f"system library has no mapping in nix/lib/dependency-maps.nix: {library}")
 
 def attrset_keys(text: str, binding: str) -> set[str]:
     match = re.search(rf"\b{re.escape(binding)}\s*=\s*\{{(.*?)^\s*\}};", text, re.M | re.S)
     if not match:
-        errors.append(f"missing attribute set in nix/packages.nix: {binding}")
+        errors.append(f"missing attribute set in nix/lib/dependency-maps.nix: {binding}")
         return set()
     return set(re.findall(r'^\s*"?([A-Za-z0-9_.+-]+)"?\s*=', match.group(1), re.M))
 
@@ -121,7 +123,7 @@ for field, binding in (("runtimeTools", "runtimeToolMap"), ("nativeTools", "nati
     used: set[str] = set()
     for body in re.findall(rf"\b{field}\s*=\s*\[([^]]*)\];", specs_text):
         used.update(re.findall(r'"([^"]+)"', body))
-    missing = used - attrset_keys(packages_text, binding)
+    missing = used - attrset_keys(maps_text, binding)
     for tool in sorted(missing):
         errors.append(f"{field} entry has no {binding} mapping: {tool}")
 
@@ -166,6 +168,8 @@ required = [
     "nix/lib/mk-workspace.nix",
     "nix/lib/mk-zig-package.nix",
     "nix/lib/source-info.nix",
+    "nix/lib/dependency-maps.nix",
+    "nix/lib/package-source-fixups.nix",
     "npins/default.nix",
     "npins/sources.json",
     "tools/audit-upstream.sh",
@@ -374,9 +378,9 @@ if "DejaVuSans.ttf" not in packages_text or "/usr/share/fonts/truetype/dejavu/De
     errors.append("shared render font fallback patch is missing")
 if "invalid or placeholder font" not in packages_text:
     errors.append("font package does not reject stripped/LFS placeholder files")
-if "b9789.tar.gz" not in packages_text:
+if "b9789.tar.gz" not in packages_text and "b9789.tar.gz" not in fixups_text:
     errors.append("otter-assist does not inject its exact llama.cpp b9789 source")
-if "${./cuda-driver-abi.h}" not in packages_text or "src/cuda_driver_abi.h" not in packages_text:
+if "${./cuda-driver-abi.h}" not in packages_text and "${../cuda-driver-abi.h}" not in fixups_text:
     errors.append("otter-rec does not inject the committed CUDA driver ABI shim")
 if 'ghosttySource.outPath + "/nix/libghostty-vt.nix"' not in packages_text or "ghosttyVt" not in packages_text:
     errors.append("pinned Ghostty VT recipe is not wired into package dependencies")

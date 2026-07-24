@@ -1,5 +1,8 @@
 # otter-shell-nix
 
+[![Check](https://github.com/cutieway/otter-shell-nix/actions/workflows/check.yml/badge.svg)](https://github.com/cutieway/otter-shell-nix/actions/workflows/check.yml)
+[![License](https://img.shields.io/github/license/cutieway/otter-shell-nix)](https://github.com/cutieway/otter-shell-nix/blob/main/LICENSE)
+
 A workspace-aware Nix flake for packaging Otter Shell from its independent
 Forgejo repositories.
 
@@ -11,6 +14,19 @@ This framework is generated from the committed, remote npins sources:
 - 33 application packages
 - 17 fixed-output external Zig sources
 - 2 separately pinned support sources: `parakeet.cpp` and Ghostty
+
+## Table of Contents
+
+- [Design decisions](#design-decisions)
+- [Building from a clean clone](#building-from-a-clean-clone)
+- [Maintainer bootstrap](#maintainer-bootstrap)
+- [Updating](#updating)
+- [Package surface](#package-surface)
+- [Patching](#patching)
+- [Local source development](#local-source-development)
+- [Modules](#modules)
+- [Known hard edges](#known-hard-edges)
+- [Validation and maintenance](#validation-and-maintenance)
 
 ## Design decisions
 

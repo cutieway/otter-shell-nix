@@ -30,3 +30,12 @@ jobs:
         run: nix build .#otter-bar .#otter-term --show-trace
       - name: Verify release manifest
         run: nix develop .#bootstrap --command python3 tools/check-manifest.py
+
+  aarch64-build:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: NixOS/nix-installer-action@00b25e1d0d56f56e90ee9814fb4385c721348f74 # main, 2026-07-13
+      - name: Build representative aarch64 packages
+        run: nix build .#otter-bar .#otter-term --show-trace

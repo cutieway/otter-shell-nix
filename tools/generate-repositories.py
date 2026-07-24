@@ -69,13 +69,16 @@ def strip_zig_comments(text: str) -> str:
     output: list[str] = []
     index = 0
     in_string = False
-    in_block_comment = False
+    block_depth = 0
     while index < len(text):
         current = text[index]
         following = text[index + 1] if index + 1 < len(text) else ""
-        if in_block_comment:
+        if block_depth:
             if current == "*" and following == "/":
-                in_block_comment = False
+                block_depth -= 1
+                index += 2
+            elif current == "/" and following == "*":
+                block_depth += 1
                 index += 2
             else:
                 if current == "\n":
@@ -90,7 +93,7 @@ def strip_zig_comments(text: str) -> str:
             index = newline + 1
             continue
         if not in_string and current == "/" and following == "*":
-            in_block_comment = True
+            block_depth = 1
             index += 2
             continue
         output.append(current)
