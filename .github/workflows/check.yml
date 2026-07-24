@@ -18,8 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - uses: NixOS/nix-installer-action@00b25e1d0d56f56e90ee9814fb4385c721348f74 # main, 2026-07-13
-      - name: Debug - find_sources returns empty in CI
-        run: nix develop .#bootstrap --command python3 tools/ci-debug-sources.py
       - name: Validate clean-checkout source metadata
         run: |
           nix develop .#bootstrap --command python3 tools/check-source-compat.py
