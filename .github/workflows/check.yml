@@ -18,14 +18,43 @@ jobs:
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - uses: NixOS/nix-installer-action@00b25e1d0d56f56e90ee9814fb4385c721348f74 # main, 2026-07-13
-      - name: Debug - diff generated vs committed repositories.nix
+      - name: Debug - find_sources returns empty in CI
         run: |
-          cp nix/repositories.nix /tmp/repos-committed.nix
-          nix develop .#bootstrap --command python3 tools/generate-repositories.py
-          cp nix/repositories.nix /tmp/repos-generated.nix
-          git checkout -- nix/repositories.nix
-          echo "=== DIFF ==="
-          diff -u /tmp/repos-committed.nix /tmp/repos-generated.nix || true
+          echo "=== Step 1: npins version ==="
+          npins --version
+          echo "=== Step 2: npins get-path for first pin ==="
+          for pin in otter_bar otter_assist otter_ui; do
+            path=$(npins get-path "$pin" 2>&1 | tail -1)
+            echo "Pin: $pin"
+            echo "  Path: $path"
+            echo "  Exists dir: $([ -d "$path" ] && echo yes || echo no)"
+            echo "  Exists readable: $([ -r "$path" ] && echo yes || echo no)"
+            echo "  build.zig.zon at root: $([ -f "$path/build.zig.zon" ] && echo yes || echo no)"
+            echo "  ls root: $(ls "$path" 2>&1 | head -5 || echo 'ACCESS DENIED')"
+            echo ""
+          done
+          echo "=== Step 3: Run Python with debug ==="
+          nix develop .#bootstrap --command python3 -c "
+import subprocess, json
+from pathlib import Path
+root = Path('$PWD')
+pins_file = root / 'npins/sources.json'
+if pins_file.is_file():
+    pins = json.loads(pins_file.read_text()).get('pins', {})
+    otter_pins = sorted(k for k in pins if k.startswith('otter_'))
+    print(f'Found {len(otter_pins)} otter_ pins')
+    first = otter_pins[0] if otter_pins else 'NONE'
+    print(f'First pin: {first}')
+    for pin in otter_pins[:3]:
+        try:
+            source = Path(subprocess.check_output(['npins', 'get-path', pin], cwd=root, text=True).strip())
+            zon = source / 'build.zig.zon'
+            print(f'  {pin}: path={source}, zon={zon.is_file()}, contents={[p.name for p in source.iterdir()][:5]}')
+        except Exception as e:
+            print(f'  {pin}: ERROR {e}')
+else:
+    print('npins/sources.json not found!')
+"
       - name: Validate clean-checkout source metadata
         run: |
           nix develop .#bootstrap --command python3 tools/check-source-compat.py
