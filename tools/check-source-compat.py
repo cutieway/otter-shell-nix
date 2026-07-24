@@ -186,21 +186,34 @@ class SourceResolver:
         if not pin_data:
             raise SystemExit(f"no npins pin for {name} (pin: {pin})")
 
-        url = pin_data.get("url")
-        if url is None:
-            # Construct archive URL from GitHub repository metadata (e.g. parakeet_cpp).
-            repo = pin_data.get("repository", {})
-            revision = pin_data.get("revision")
-            if repo.get("type") == "GitHub" and revision:
-                url = f"https://github.com/{repo['owner']}/{repo['repo']}/archive/{revision}.tar.gz"
-            else:
+        submodules = pin_data.get("submodules", False)
+        repo_data = pin_data.get("repository", {})
+        revision = pin_data.get("revision")
+
+        if submodules and repo_data.get("type") == "GitHub":
+            # GitHub repos with submodules need fetchGit to include submodule
+            # content (e.g. parakeet_cpp/third_party/ggml).
+            git_url = f"https://github.com/{repo_data['owner']}/{repo_data['repo']}.git"
+            expr = (
+                f'(toString (builtins.fetchGit {{'
+                f' url = "{git_url}";'
+                f' rev = "{revision}";'
+                f' submodules = true;'
+                f' hash = "";'
+                f' }}))'
+            )
+        else:
+            url = pin_data.get("url")
+            if url is None and repo_data.get("type") == "GitHub" and revision:
+                url = f"https://github.com/{repo_data['owner']}/{repo_data['repo']}/archive/{revision}.tar.gz"
+            if not url:
                 raise SystemExit(
                     f"cannot construct fetch URL for npins pin {pin}: "
                     f"type={pin_data.get('type')}, url=null, revision={revision!r}"
                 )
+            expr = f'(toString (builtins.fetchTarball {{ url = "{url}"; }}))'
 
         try:
-            expr = f'(toString (builtins.fetchTarball {{ url = "{url}"; }}))'
             output = subprocess.check_output(
                 ["nix", "eval", "--impure", "--raw", "--expr", expr],
                 cwd=ROOT, text=True, timeout=120,
