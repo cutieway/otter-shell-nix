@@ -45,14 +45,48 @@ def find_sources(source_root: Path | None) -> dict[str, Path]:
             "npins/sources.json is missing; pass --source-root or run tools/pin-release.sh"
         )
     pins = json.loads(pins_file.read_text()).get("pins", {})
+
+    def _resolve_npins(pin: str) -> Path | None:
+        """Return npins store path for *pin*, falling back to nix builtin fetchers."""
+        try:
+            source = Path(
+                subprocess.check_output(["npins", "get-path", pin], cwd=ROOT, text=True, timeout=120).strip()
+            )
+            if source.is_dir():
+                return source
+        except (subprocess.TimeoutExpired, subprocess.CalledProcessError):
+            pass
+        # Fallback: use nix builtin fetchers when npins paths are not realized.
+        pin_data = pins.get(pin)
+        if not pin_data or not pin_data.get("url"):
+            return None
+        pin_type = pin_data.get("type", "")
+        url = pin_data["url"]
+        try:
+            if pin_type in ("GitRelease", "Url", "MutableUrl"):
+                hash_arg = f'hash = "{pin_data["hash"]}";' if pin_data.get("hash") else ""
+                expr = f'(builtins.fetchTarball {{ url = "{url}"; {hash_arg} }}).outPath'
+            elif pin_type == "Git":
+                rev = pin_data.get("revision", "")
+                expr = f'(builtins.fetchGit {{ url = "{url}"; rev = "{rev}"; }}).outPath'
+            else:
+                return None
+            source = Path(
+                subprocess.check_output(
+                    ["nix", "eval", "--impure", "--raw", "--expr", expr],
+                    cwd=ROOT, text=True, timeout=120,
+                ).strip()
+            )
+            return source if source.is_dir() else None
+        except (subprocess.TimeoutExpired, subprocess.CalledProcessError):
+            return None
+
     result: dict[str, Path] = {}
     for pin in sorted(pins):
         if not pin.startswith("otter_"):
             continue
-        source = Path(
-            subprocess.check_output(["npins", "get-path", pin], cwd=ROOT, text=True).strip()
-        )
-        if (source / "build.zig.zon").is_file():
+        source = _resolve_npins(pin)
+        if source is not None and (source / "build.zig.zon").is_file():
             result[pin.replace("_", "-")] = source
     return result
 
