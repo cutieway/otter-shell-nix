@@ -45,7 +45,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_assist",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-assistant": {
@@ -62,7 +62,7 @@
       "hasRemoteDeps": true,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_assistant",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -83,7 +83,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_bar",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client"
       ]
@@ -95,7 +95,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_cal",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-calc": {
@@ -105,7 +105,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_calc",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-clicker": {
@@ -118,7 +118,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_clicker",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client"
       ]
@@ -132,7 +132,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_clip",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -145,7 +145,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_conf",
-      "snapshotVersion": "1.11.43",
+      "snapshotVersion": "1.11.46",
       "systemLibraries": []
     },
     "otter-config-types": {
@@ -157,7 +157,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_config_types",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-desktop": {
@@ -167,7 +167,7 @@
       "hasRemoteDeps": true,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_desktop",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "jemalloc",
         "mimalloc",
@@ -183,7 +183,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_emoji",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-examples": {
@@ -206,7 +206,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_geo",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-greeter": {
@@ -224,7 +224,7 @@
       "hasRemoteDeps": true,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_greeter",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -260,7 +260,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_idle",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client"
       ]
@@ -279,7 +279,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_jade",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client"
       ]
@@ -300,7 +300,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_launcher",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -321,7 +321,7 @@
       "hasRemoteDeps": true,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_lock",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -342,7 +342,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_logout",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -363,7 +363,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_monitor",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -382,7 +382,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_note",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -403,7 +403,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_notifications",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -424,7 +424,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_osd",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client"
       ]
@@ -438,7 +438,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_pick",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client"
       ]
@@ -458,7 +458,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_polkit",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -474,7 +474,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_rec",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "dl",
         "egl",
@@ -495,7 +495,7 @@
       "hasRemoteDeps": true,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_render",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "fontconfig",
         "jemalloc",
@@ -510,7 +510,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_screenshot",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client"
       ]
@@ -524,7 +524,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_search",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-settings": {
@@ -542,7 +542,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_settings",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -563,7 +563,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_shot",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
@@ -584,7 +584,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_term",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "ghostty-vt",
         "wayland-client",
@@ -601,7 +601,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_theme",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-theme-gen": {
@@ -616,7 +616,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_theme_gen",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-timer": {
@@ -627,7 +627,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_timer",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-tools-core": {
@@ -639,7 +639,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_tools_core",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-transcribe": {
@@ -657,7 +657,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_transcribe",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "dl",
         "pthread",
@@ -679,7 +679,7 @@
       "hasRemoteDeps": true,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_ui",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-utils": {
@@ -687,7 +687,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_utils",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-vox": {
@@ -699,7 +699,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_vox",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "dl",
         "m",
@@ -714,7 +714,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_vte",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": []
     },
     "otter-wallpaper": {
@@ -731,7 +731,7 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_wallpaper",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client"
       ]
@@ -745,7 +745,7 @@
       "hasRemoteDeps": true,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_wayland",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "jemalloc",
         "mimalloc",
@@ -766,12 +766,12 @@
       "hasRemoteDeps": false,
       "minimumZigVersion": "0.16.0",
       "pin": "otter_weather",
-      "snapshotVersion": "0.11.43",
+      "snapshotVersion": "0.11.46",
       "systemLibraries": [
         "wayland-client",
         "xkbcommon"
       ]
     }
   },
-  "snapshot": "0.11.43"
+  "snapshot": "0.11.46"
 }
