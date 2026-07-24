@@ -8,6 +8,7 @@ rather than silently carrying a stale substitution.
 from __future__ import annotations
 
 import argparse
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -152,25 +153,78 @@ class SourceResolver:
         if self.source_root is not None:
             source = self.source_root / name
         else:
-            pin = name.replace("-", "_")
-            try:
-                output = subprocess.check_output(
-                    ["npins", "get-path", pin],
-                    cwd=ROOT,
-                    stderr=subprocess.PIPE,
-                    text=True,
-                ).strip()
-            except subprocess.CalledProcessError as error:
-                detail = error.stderr.strip()
-                suffix = f":\n{detail}" if detail else ""
-                raise SystemExit(f"could not resolve npins source {pin}{suffix}") from error
-            if not output:
-                raise SystemExit(f"npins returned an empty source path for {pin}")
-            source = Path(output)
+            source = self._resolve_npins(name)
 
         resolved = source.resolve()
         self._repositories[name] = resolved
         return resolved
+
+    def _resolve_npins(self, name: str) -> Path:
+        """Resolve an npins source to a store path, with fallback to nix builtin fetchers."""
+        pin = name.replace("-", "_")
+        try:
+            output = subprocess.check_output(
+                ["npins", "get-path", pin],
+                cwd=ROOT,
+                stderr=subprocess.PIPE,
+                text=True,
+            ).strip()
+            if output:
+                path = Path(output)
+                if path.is_dir():
+                    return path
+        except subprocess.CalledProcessError:
+            pass
+
+        # Fallback: use nix builtin fetchers when npins paths are not realized
+        # in CI environments (same pattern as generate-repositories.py).
+        pins_file = ROOT / "npins/sources.json"
+        if not pins_file.is_file():
+            raise SystemExit(f"npins/sources.json is missing, cannot resolve {name}")
+        pins = json.loads(pins_file.read_text()).get("pins", {})
+        pin_data = pins.get(pin)
+        if not pin_data:
+            raise SystemExit(f"no npins pin for {name} (pin: {pin})")
+
+        submodules = pin_data.get("submodules", False)
+        repo_data = pin_data.get("repository", {})
+        revision = pin_data.get("revision")
+
+        if submodules and repo_data.get("type") == "GitHub":
+            # GitHub repos with submodules need fetchGit to include submodule
+            # content (e.g. parakeet_cpp/third_party/ggml).
+            git_url = f"https://github.com/{repo_data['owner']}/{repo_data['repo']}.git"
+            # Omit hash — older Nix versions (e.g. 2.336.0 in CI) do
+            # not support the hash argument to builtins.fetchGit.
+            expr = (
+                f'(toString (builtins.fetchGit {{'
+                f' url = "{git_url}";'
+                f' rev = "{revision}";'
+                f' submodules = true;'
+                f' }}))'
+            )
+        else:
+            url = pin_data.get("url")
+            if url is None and repo_data.get("type") == "GitHub" and revision:
+                url = f"https://github.com/{repo_data['owner']}/{repo_data['repo']}/archive/{revision}.tar.gz"
+            if not url:
+                raise SystemExit(
+                    f"cannot construct fetch URL for npins pin {pin}: "
+                    f"type={pin_data.get('type')}, url=null, revision={revision!r}"
+                )
+            expr = f'(toString (builtins.fetchTarball {{ url = "{url}"; }}))'
+
+        try:
+            output = subprocess.check_output(
+                ["nix", "eval", "--impure", "--raw", "--expr", expr],
+                cwd=ROOT, text=True, timeout=120,
+            ).strip()
+            path = Path(output)
+            if path.is_dir():
+                return path
+            raise SystemExit(f"fetched source {name} is not a directory: {path}")
+        except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
+            raise SystemExit(f"could not resolve npins source {pin}: {error}") from error
 
     def path(self, relative: str) -> Path:
         repository, separator, child = relative.partition("/")
