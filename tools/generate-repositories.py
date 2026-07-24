@@ -63,16 +63,15 @@ def find_sources(source_root: Path | None) -> dict[str, Path]:
         pin_type = pin_data.get("type", "")
         url = pin_data["url"]
         try:
-            if pin_type in ("GitRelease", "Url", "MutableUrl"):
+            if pin_type in ("GitRelease", "Git", "Url", "MutableUrl"):
+                # npins stores archive tarball URLs for both GitRelease and Git
+                # pin types (tags and commit SHAs). Use fetchTarball for both.
                 # Omit hash — older Nix versions don't support the hash argument to
                 # builtins.fetchTarball. Without a hash the fetch is still correct,
                 # just not content-addressed for caching.
                 # Use toString because fetchTarball may return a string or a set
                 # depending on Nix version.
                 expr = f'(toString (builtins.fetchTarball {{ url = "{url}"; }}))'
-            elif pin_type == "Git":
-                rev = pin_data.get("revision", "")
-                expr = f'(builtins.fetchGit {{ url = "{url}"; rev = "{rev}"; }}).outPath'
             else:
                 return None
             source = Path(
