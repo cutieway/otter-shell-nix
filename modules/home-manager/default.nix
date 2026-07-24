@@ -52,7 +52,7 @@ in
       type = lib.types.nullOr lib.types.package;
       default = lib.attrByPath [ "otter-shell" "fonts" ] null pkgs;
       defaultText = lib.literalExpression "pkgs.otter-shell.fonts or null";
-      description = "Font package used by Otter Shell.";
+      description = "Font package used by Otter Shell. Required when installFonts is true; ignored otherwise.";
     };
 
     assist.model = lib.mkOption {

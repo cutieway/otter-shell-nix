@@ -7,17 +7,42 @@ in
 {
   options.services.otter-shell = {
     enable = lib.mkEnableOption "system prerequisites for Otter Shell";
-    installFonts = lib.mkOption { type = lib.types.bool; default = true; };
+    installFonts = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Whether to install Otter Shell fonts system-wide via fonts.packages.";
+    };
     fontPackage = lib.mkOption {
       type = lib.types.nullOr lib.types.package;
       default = lib.attrByPath [ "otter-shell" "fonts" ] null pkgs;
       defaultText = lib.literalExpression "pkgs.otter-shell.fonts or null";
+      description = "Font package used by Otter Shell. Required when installFonts is true.";
     };
-    enablePipeWire = lib.mkOption { type = lib.types.bool; default = true; };
-    enableUPower = lib.mkOption { type = lib.types.bool; default = true; };
-    enableNetworkManager = lib.mkOption { type = lib.types.bool; default = false; };
-    enablePolkit = lib.mkOption { type = lib.types.bool; default = true; };
-    enableLockPam = lib.mkOption { type = lib.types.bool; default = true; };
+    enablePipeWire = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable PipeWire with PulseAudio support for Otter Shell's terminal bell and audio.";
+    };
+    enableUPower = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable UPower for power management integration.";
+    };
+    enableNetworkManager = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable NetworkManager for network management integration.";
+    };
+    enablePolkit = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable Polkit and its pkexec wrapper for privilege escalation.";
+    };
+    enableLockPam = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Create a PAM service for otter-lock (security.pam.services.otter-lock).";
+    };
     enableRecorderKmsWrapper = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -27,6 +52,7 @@ in
       type = lib.types.nullOr lib.types.package;
       default = lib.attrByPath [ "otter-shell" "otter-rec" ] null pkgs;
       defaultText = lib.literalExpression "pkgs.otter-shell.otter-rec or null";
+      description = "Package providing otter-rec-kms-server. Required when enableRecorderKmsWrapper is true.";
     };
   };
 

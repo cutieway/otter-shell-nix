@@ -1,3 +1,15 @@
+# Build a link-farm workspace from Otter Shell source directories.
+#
+# Nix's fixed-output source fetchers (npins) produce independent store paths
+# for each repository. Otter Shell's Zig build.zig expects a sibling-repository
+# layout (all repos under a common parent). This function creates that layout
+# as a link farm so the Zig build finds ../otter-* repositories as siblings.
+#
+# When a source is missing (not yet pinned), a stub derivation is substituted
+# that writes "missing npins source: <pin>" to a MISSING_SOURCE file. This
+# lets the framework pass evaluation even with an incomplete pin set, at the
+# cost of failing later at build time if the stub is actually compiled.
+
 { pkgs, lib }:
 {
   repositories,

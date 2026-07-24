@@ -1,3 +1,16 @@
+# Dependency-graph closure traversal for Otter Shell repositories.
+#
+# Given a repository name, computes its full transitive dependency closure
+# including the repository itself, using a DFS that detects cycles and
+# missing metadata. The repositories attribute set is expected to have the
+# shape produced by nix/repositories.nix (generated):
+#
+#   "<repo>" = {
+#     pin = "<npins-pin-name>";
+#     directDeps = [ "<dep>" ... ];
+#     ...
+#   };
+
 { lib, repositories }:
 let
   visit = stack: seen: name:
@@ -14,5 +27,7 @@ let
       next ++ [ name ];
 in
 {
-  closureFor = name: lib.unique (visit [ ] [ ] name);
+  # Produce the transitive closure of `name`, including the repo itself, in
+  # topological order (deepest dependencies first).
+  closureFor = name: builtins.foldl' (acc: dep: if builtins.elem dep acc then acc else acc ++ [ dep ]) [ ] (visit [ ] [ ] name);
 }

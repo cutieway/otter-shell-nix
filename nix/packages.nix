@@ -73,10 +73,6 @@ let
   soundTheme = pkgs."sound-theme-freedesktop";
   termBellPlayer = "${pkgs.pulseaudio}/bin/paplay";
   termBellSound = "${soundTheme}/share/sounds/freedesktop/stereo/bell.oga";
-  llamaCppArchive = pkgs.fetchurl {
-    url = "https://github.com/ggml-org/llama.cpp/archive/refs/tags/b9789.tar.gz";
-    hash = "sha256-tR8ToaZlaFX/bARZBB5hY8WdWo1jJUo8DlnDdc58LxU=";
-  };
 
   ghosttySource =
     if builtins.hasAttr "ghostty" sources then sources.ghostty else
@@ -96,87 +92,13 @@ let
     else
       null;
 
-  systemDependencyMap = {
-    "wayland-client" = { name = "wayland"; package = pkgs.wayland; };
-    xkbcommon = { name = "libxkbcommon"; package = pkgs.libxkbcommon; };
-    fontconfig = { name = "fontconfig"; package = pkgs.fontconfig; };
-    pam = { name = "pam"; package = pkgs.pam; };
-    "ghostty-vt" = {
-      name = "libghostty-vt";
-      package = ghosttyVt;
-    };
-    libavcodec = { name = "ffmpeg"; package = pkgs.ffmpeg; };
-    libavformat = { name = "ffmpeg"; package = pkgs.ffmpeg; };
-    libavutil = { name = "ffmpeg"; package = pkgs.ffmpeg; };
-    libswscale = { name = "ffmpeg"; package = pkgs.ffmpeg; };
-    libdrm = { name = "libdrm"; package = pkgs.libdrm; };
-    egl = { name = "libglvnd"; package = pkgs.libglvnd; };
-    glesv2 = { name = "libglvnd"; package = pkgs.libglvnd; };
-    # Supplied by stdenv/libc or only selected by non-default allocator options.
-    dl = null; m = null; pthread = null; rt = null; jemalloc = null; mimalloc = null;
-  };
+  maps = import ./lib/dependency-maps.nix { inherit pkgs lib ghosttyVt; };
+  systemDependencyMap = maps.systemDependencyMap;
+  namedDependencyMap = maps.namedDependencyMap;
+  nativeToolMap = maps.nativeToolMap;
+  runtimeToolMap = maps.runtimeToolMap;
 
-  namedDependencyMap = {
-    ffmpeg = pkgs.ffmpeg;
-    libdrm = pkgs.libdrm;
-    libglvnd = pkgs.libglvnd;
-    "libghostty-vt" = ghosttyVt;
-    "spirv-headers" = pkgs.spirv-headers;
-    "vulkan-headers" = pkgs.vulkan-headers;
-    "vulkan-loader" = pkgs.vulkan-loader;
-  };
-
-  nativeToolMap = {
-    cmake = pkgs.cmake;
-    git = pkgs.git;
-    shaderc = lib.getBin pkgs.shaderc;
-  };
-
-  runtimeToolMap = {
-    bash = pkgs.bash;
-    coreutils = pkgs.coreutils;
-    hyprland = pkgs.hyprland;
-    systemd = pkgs.systemd;
-    "wl-clipboard" = pkgs.wl-clipboard;
-    "xdg-utils" = pkgs.xdg-utils;
-  };
-
-  packageSourceFixups = {
-    otter-assist = ''
-      # Forgejo release archives omit git submodule contents. Supply the exact
-      # llama.cpp release expected by scripts/build-llama-static.sh.
-      mkdir -p vendor/llama.cpp
-      tar -xzf ${llamaCppArchive} \
-        --strip-components=1 \
-        -C vendor/llama.cpp
-    '';
-    otter-settings = ''
-      substituteInPlace src/app_config.zig \
-        --replace-fail '/usr/bin/tee' '${pkgs.coreutils}/bin/tee'
-    '';
-    otter-rec = ''
-      # Keep pkexec unresolved: on NixOS it must come from /run/wrappers/bin.
-      substituteInPlace src/kms_client.zig \
-        --replace-fail '"setcap"' '"${pkgs.libcap}/bin/setcap"'
-
-      # The recorder dynamically loads libcuda rather than linking the CUDA
-      # toolkit. Supply only the stable driver ABI declarations it uses.
-      cp ${./cuda-driver-abi.h} src/cuda_driver_abi.h
-      substituteInPlace src/av.h \
-        --replace-fail \
-          '#include <libavutil/hwcontext_cuda.h>' \
-          '#include "cuda_driver_abi.h"
-#define CUDA_VERSION 12000
-#include <libavutil/hwcontext_cuda.h>'
-      substituteInPlace src/gpu_bridge.h \
-        --replace-fail '#include <cuda.h>' '#include "cuda_driver_abi.h"' \
-        --replace-fail '#include <cudaGL.h>' ""
-      substituteInPlace src/gpu_bridge.c \
-        --replace-fail \
-          'if (load_cuda_symbol2((void **)&p_cu_memcpy_2d_async, "cuMemcpy2DAsync_v2", "cuMemcpy2DAsync", err, err_len) < 0) return -1;' \
-          'if (load_cuda_symbol((void **)&p_cu_memcpy_2d_async, "cuMemcpy2DAsync_v2", err, err_len) < 0) return -1;'
-    '';
-  };
+  packageSourceFixups = import ./lib/package-source-fixups.nix { inherit pkgs lib; };
 
   lockPathFor = repo: root + "/locks/${repo}.nix";
 
@@ -224,6 +146,10 @@ let
       };
       info = sourceInfo name;
       fontDir = "${otterFonts}/share/fonts/truetype/otter-shell/";
+      nativeToolsResolved = builtins.map (tool: nativeToolMap.${tool} or null) (spec.nativeTools or [ ]);
+      runtimeToolsResolved = builtins.map (tool: runtimeToolMap.${tool} or null) (spec.runtimeTools or [ ]);
+      unknownNativeTools = builtins.filter (tool: !builtins.hasAttr tool nativeToolMap) (spec.nativeTools or [ ]);
+      unknownRuntimeTools = builtins.filter (tool: !builtins.hasAttr tool runtimeToolMap) (spec.runtimeTools or [ ]);
       sharedResourcePatch = ''
         ${lib.optionalString (builtins.elem "otter-render" closure) ''
           substituteInPlace ../otter-render/build.zig \
@@ -300,10 +226,10 @@ let
       externalDeps = external.env;
       missingPins = (map (repo: repositories.${repo}.pin) (builtins.filter sourceMissing closure)) ++ missingExtraPins;
       missingLocks = external.missing;
-      missingSystemDeps = sys.missing;
+      missingSystemDeps = sys.missing ++ unknownNativeTools ++ unknownRuntimeTools;
       buildInputs = sys.packages;
-      nativeBuildInputs = map (tool: nativeToolMap.${tool}) (spec.nativeTools or [ ]);
-      runtimeInputs = map (tool: runtimeToolMap.${tool}) (spec.runtimeTools or [ ]);
+      nativeBuildInputs = nativeToolsResolved;
+      runtimeInputs = runtimeToolsResolved;
       zigBuildFlags = [ "-Dcpu=baseline" ] ++ (spec.zigBuildFlags or [ ]);
       postPatch = sharedResourcePatch + sourceFixup + (spec.postPatch or "");
       postInstall = spec.postInstall or "";
