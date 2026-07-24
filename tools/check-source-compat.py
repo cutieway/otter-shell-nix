@@ -194,12 +194,13 @@ class SourceResolver:
             # GitHub repos with submodules need fetchGit to include submodule
             # content (e.g. parakeet_cpp/third_party/ggml).
             git_url = f"https://github.com/{repo_data['owner']}/{repo_data['repo']}.git"
+            # Omit hash — older Nix versions (e.g. 2.336.0 in CI) do
+            # not support the hash argument to builtins.fetchGit.
             expr = (
                 f'(toString (builtins.fetchGit {{'
                 f' url = "{git_url}";'
                 f' rev = "{revision}";'
                 f' submodules = true;'
-                f' hash = "";'
                 f' }}))'
             )
         else:
