@@ -67,7 +67,9 @@ def find_sources(source_root: Path | None) -> dict[str, Path]:
                 # Omit hash — older Nix versions don't support the hash argument to
                 # builtins.fetchTarball. Without a hash the fetch is still correct,
                 # just not content-addressed for caching.
-                expr = f'(builtins.fetchTarball {{ url = "{url}"; }}).outPath'
+                # Use toString because fetchTarball may return a string or a set
+                # depending on Nix version.
+                expr = f'(toString (builtins.fetchTarball {{ url = "{url}"; }}))'
             elif pin_type == "Git":
                 rev = pin_data.get("revision", "")
                 expr = f'(builtins.fetchGit {{ url = "{url}"; rev = "{rev}"; }}).outPath'
