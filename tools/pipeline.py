@@ -1050,7 +1050,7 @@ SOURCE_COMPAT_EXPECTED: dict[str, tuple[str, ...]] = {
     "otter-render/src/font/resolve.zig": ("/usr/share/fonts/otter-shell/",),
     "otter-render/build.zig": ("break :blk fontconfig_c.createModule();",),
     "otter-render/vendor/zigimg/src/simd.zig": (
-        "inline for (0..8) |i| res[i] = v[@as(u32, @bitCast(mask[i]))];",
+        "inline for (0..8) |i| res[i] = value[@as(u32, @bitCast(mask[i]))];",
     ),
     "otter-render/src/quad_renderer.zig": (
         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",

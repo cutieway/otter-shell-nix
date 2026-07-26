@@ -158,17 +158,6 @@ let
               '        fontconfig_c.addSystemIncludePath(.{ .cwd_relative = "${lib.getDev pkgs.fontconfig}/include", });
         break :blk fontconfig_c.createModule();'
 
-          # zigimg's scalar AVX2 fallback indexes a vector with a runtime
-          # value. Zig 0.16 requires runtime indexing to go through an array.
-          substituteInPlace ../otter-render/vendor/zigimg/src/simd.zig \
-            --replace-fail \
-              '        inline for (0..8) |i| res[i] = v[@as(u32, @bitCast(mask[i]))];' \
-              '        const lanes: [8]i32 = v;
-        inline for (0..8) |i| {
-            const index = @as(u32, @bitCast(mask[i])) & 7;
-            res[i] = lanes[index];
-        }'
-
           substituteInPlace ../otter-render/src/font/resolve.zig \
             --replace-fail '/usr/share/fonts/otter-shell/' '${fontDir}'
 
