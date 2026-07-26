@@ -51,8 +51,7 @@ This framework is generated from the committed, remote npins sources:
 
 The committed npins files, generated Zig locks, and Ghostty's revision-matched
 upstream Nix lock are the complete source description.
-Neither consumers nor CI need a `repos/` directory or a pre-cloned Otter
-workspace:
+Neither consumers nor CI need a pre-cloned Otter workspace:
 
 ```bash
 nix build .#otter-bar
@@ -119,8 +118,8 @@ nix flake check
 regenerates the complete recursive Zig lock set, checks source compatibility,
 and runs the framework gate. Before changing pins it audits the live Forgejo
 organization, and the framework rejects mixed versions in the coordinated
-release set. It does not read `repos/`. If Ghostty advances, its upstream VT
-recipe and dependency lock advance in the same source pin.
+release set. If Ghostty advances, its upstream VT recipe and dependency lock
+advance in the same source pin.
 
 For a new coordinated release:
 

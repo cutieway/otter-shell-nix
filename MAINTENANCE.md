@@ -7,7 +7,7 @@ policy. Keep that boundary intact: regenerate `nix/repositories.nix` via
 The current public surface is derived from 45 pinned Otter sources, 33 package
 specifications, 17 fixed-output external Zig sources, and the separately pinned
 `parakeet.cpp` and Ghostty support trees. Normal maintenance is remote-only: the
-generators resolve repositories through npins and do not require `repos/`.
+generators resolve repositories through npins.
 
 ## Routine pin refresh
 

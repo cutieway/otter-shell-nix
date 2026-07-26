@@ -65,7 +65,7 @@ keeping generated facts separate from human policy.
 
 The 45 Otter repositories are normal npins sources. Repository metadata and Zig
 locks are regenerated from `npins get-path`, so a clean clone, CI runner, or
-consumer never needs the development `repos/` directory. The 17 external Zig
+consumer never needs a development workspace. The 17 external Zig
 sources are fixed-output derivations and are normalized into Zig 0.16 cache
 archives before sandboxed compilation begins.
 
