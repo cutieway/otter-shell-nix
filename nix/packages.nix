@@ -110,11 +110,13 @@ let
     in
     {
       missing = builtins.filter (repo: !builtins.pathExists (lockPathFor repo)) lockRepos;
-      env = pkgs.buildEnv {
+      # ponytail: symlinkJoin over buildEnv for deterministic ordering.
+      # buildEnv ignoreCollisions=true silently drops duplicate paths; symlinkJoin
+      # preserves the first occurrence and fails on conflict if asked.
+      env = pkgs.symlinkJoin {
         name = "otter-zig-deps";
         inherit paths;
         pathsToLink = [ "/" ];
-        ignoreCollisions = true;
       };
     };
 
@@ -246,10 +248,12 @@ let
       builtins.filter (name: specs.${name}.tier == tier) (builtins.attrNames specs)
     )
   );
-  bundle = name: paths: pkgs.buildEnv {
+  # ponytail: symlinkJoin over buildEnv for deterministic ordering.
+  # Bundles collate independent packages so collisions are unexpected; symlinkJoin
+  # preserves first-write-wins semantics without silent drops.
+  bundle = name: paths: pkgs.symlinkJoin {
     inherit name paths;
     pathsToLink = [ "/bin" "/share" ];
-    ignoreCollisions = true;
   };
 
   core = bundle "otter-shell-core" ([ otterFonts ] ++ byTier "core" ++ byTier "helpers");

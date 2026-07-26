@@ -86,14 +86,17 @@ in
       // lib.optionalAttrs hasSeparatePkexecOption {
         # Recent NixOS releases expose this separately. Older releases create
         # the pkexec wrapper whenever Polkit is enabled.
-        security.polkit.enablePkexecWrapper = lib.mkDefault true;
+        # ponytail: mkForce prevents silent weakening by downstream consumers.
+        # A user who intentionally disables this can use mkForce themselves.
+        security.polkit.enablePkexecWrapper = lib.mkForce true;
       }
     ))
     (lib.mkIf cfg.enableLockPam { security.pam.services.otter-lock = { }; })
     (lib.mkIf (cfg.enableRecorderKmsWrapper && cfg.recorderPackage != null) {
       # The package also contains an unprivileged binary with this name. Point
       # the recorder at the capability-bearing /run wrapper deterministically.
-      environment.sessionVariables.OTTER_REC_KMS_SERVER = lib.mkDefault "/run/wrappers/bin/otter-rec-kms-server";
+      # ponytail: mkForce prevents silent redirection of KMS server by downstream consumers.
+      environment.sessionVariables.OTTER_REC_KMS_SERVER = lib.mkForce "/run/wrappers/bin/otter-rec-kms-server";
       security.wrappers.otter-rec-kms-server = {
         source = "${cfg.recorderPackage}/bin/otter-rec-kms-server";
         owner = "root";

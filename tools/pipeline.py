@@ -33,6 +33,16 @@ ROOT = Path(__file__).resolve().parent.parent
 PIKA_PREFIX = "git+https://git.pika-os.com/otter-shell/"
 HEX_REV = re.compile(r"^[0-9a-fA-F]{40}(?:[0-9a-fA-F]{24})?$")
 SRI_SHA256 = re.compile(r"^sha256-[A-Za-z0-9+/]{43}=$")
+# Allowlisted URL prefixes for Nix expression interpolation and prefetch.
+# Only known-good hosts are permitted to prevent injection and SSRF.
+ALLOWED_URL_PREFIXES = (
+    "https://github.com/",
+    "https://gitlab.com/",
+    "https://codeberg.org/",
+    "https://git.pika-os.com/",
+)
+# Strict git ref fragment pattern: alphanumeric, dots, dashes, underscores, slashes.
+GIT_REF_PATTERN = re.compile(r"^[A-Za-z0-9._/\-]+$")
 
 
 # ---------------------------------------------------------------------------
@@ -177,6 +187,8 @@ def npins_get_path(pin: str) -> Path:
             url = f"https://github.com/{repo_data['owner']}/{repo_data['repo']}/archive/{revision}.tar.gz"
         if not url:
             raise SystemExit(f"cannot construct URL for npins pin {pin}")
+        if not url.startswith(ALLOWED_URL_PREFIXES):
+            raise SystemExit(f"npins pin {pin!r} has URL that is not in the allowlist: {url[:80]}...")
         expr = f'(toString (builtins.fetchTarball {{ url = "{url}"; }}))'
     try:
         raw = subprocess.check_output(
@@ -309,6 +321,10 @@ def _render_nix(repositories: dict[str, Repository]) -> str:
 
 
 def cmd_generate(args: argparse.Namespace) -> int:
+    if args.source_root is not None:
+        print("warning: --source-root bypasses npins pin integrity (SRI hashes, revision pinning)", file=sys.stderr)
+        if os.environ.get("CI") == "true":
+            raise SystemExit("refusing --source-root in CI; npins pin integrity would be bypassed")
     paths = _find_sources(args.source_root)
     repositories = {name: _inspect_repo(name, path) for name, path in paths.items()}
     unknown = sorted({dep for r in repositories.values() for dep in r.directDeps} - repositories.keys())
@@ -444,6 +460,9 @@ def _archive_prefetch(url: str) -> dict[str, str]:
 
 
 def _resolve_git_revision(url: str, fragment: str) -> str:
+    # Reject fragments with characters that could manipulate git ref resolution.
+    if not GIT_REF_PATTERN.match(fragment):
+        raise ValueError(f"git ref fragment contains invalid characters: {fragment!r}")
     candidates = (
         (f"refs/tags/{fragment}^{{}}", f"refs/tags/{fragment}"),
         (f"refs/heads/{fragment}",),
@@ -473,7 +492,18 @@ class FixedSource:
     rev: str | None = None
 
 
+def _validate_url(url: str) -> None:
+    """Reject dependency URLs not pointing to an allowlisted host."""
+    if url.startswith("git+"):
+        base = url[4:].split("#", 1)[0].split("?", 1)[0]
+    else:
+        base = url
+    if not base.startswith(ALLOWED_URL_PREFIXES):
+        raise ValueError(f"dependency URL not in allowlist: {url[:80]}...")
+
+
 def _prefetch(spec: DependencySpec) -> FixedSource:
+    _validate_url(spec.url)
     if not spec.url.startswith("git+"):
         result = _archive_prefetch(spec.url)
         return FixedSource(kind="archive", url=spec.url, nix_hash=result["hash"], store_path=Path(result["storePath"]))
@@ -605,6 +635,10 @@ def _check_root_dependencies(root_specs: dict[str, set[str]], output: Path) -> N
 
 
 def cmd_lock(args: argparse.Namespace) -> int:
+    if args.source_root is not None:
+        print("warning: --source-root bypasses npins pin integrity (SRI hashes, revision pinning)", file=sys.stderr)
+        if os.environ.get("CI") == "true":
+            raise SystemExit("refusing --source-root in CI; npins pin integrity would be bypassed")
     repositories = _parse_repositories()
     local_root = args.source_root.resolve() if args.source_root else None
     root_specs: dict[str, set[str]] = {}
@@ -1271,6 +1305,8 @@ def _check_manifest(write: bool = False) -> None:
 def cmd_check(args: argparse.Namespace) -> int:
     if args.mode in ("all", "framework"):
         _check_framework()
+    if args.source_root is not None and os.environ.get("CI") == "true":
+        raise SystemExit("refusing --source-root in CI; npins pin integrity would be bypassed")
     if args.mode in ("all", "compat"):
         _check_compat(args.source_root)
     if args.mode in ("all", "manifest"):
@@ -1343,22 +1379,29 @@ def cmd_audit(args: argparse.Namespace) -> int:
     upstream_repos: list[str] = []
     page = 1
     conn = http.client.HTTPSConnection(api, timeout=30)
-    while True:
+    while page <= 20:  # ponytail: pagination bound prevents runaway on API misconfiguration
         conn.request("GET", f"{path}?limit=50&page={page}")
         resp = conn.getresponse()
         if resp.status != 200:
             raise SystemExit(f"Forgejo API returned HTTP {resp.status}")
         try:
-            data = json.loads(resp.read().decode("utf-8"))
+            raw = resp.read().decode("utf-8")
+            data = json.loads(raw)
         except json.JSONDecodeError as e:
             raise SystemExit(f"Forgejo API returned invalid JSON: {e}") from e
+        if not isinstance(data, list):
+            raise SystemExit(f"Forgejo API returned unexpected JSON shape (expected list, got {type(data).__name__})")
         if not data:
             break
         for repo in data:
+            if not isinstance(repo, dict):
+                continue
             name = repo.get("name", "")
             if isinstance(name, str) and name.startswith("otter-"):
                 upstream_repos.append(name)
         page += 1
+    if page > 20:
+        raise SystemExit("Forgejo API returned more than 20 pages; aborting (~1000 repos seems wrong)")
     conn.close()
     upstream = sorted(set(upstream_repos))
 
@@ -1432,6 +1475,7 @@ def main() -> int:
 
     p_gen = sub.add_parser("generate", help="regenerate nix/repositories.nix")
     p_gen.add_argument("--source-root", type=Path, help="directory with otter-* repos (instead of npins)")
+    p_gen.add_argument("--unsafe-skip-pin-check", action="store_true", help=argparse.SUPPRESS)
     p_gen.add_argument("--check", action="store_true", help="verify freshness without writing")
 
     p_lock = sub.add_parser("lock", help="regenerate Zig dependency locks")
