@@ -115,7 +115,7 @@ nix flake check
 ```
 
 `pipeline.py update` updates the requested npins sources, regenerates
-`nix/repositories.nix` and `SOURCE-ANALYSIS.json` from those fetched pins,
+`nix/repositories.nix` from those fetched pins,
 regenerates the complete recursive Zig lock set, checks source compatibility,
 and runs the framework gate. Before changing pins it audits the live Forgejo
 organization, and the framework rejects mixed versions in the coordinated
@@ -150,8 +150,6 @@ remote-derived metadata with an edited workspace or extracted snapshot:
 ./tools/pipeline.py lock \
   --source-root /path/to/otter-workspace --inventory-only
 ```
-
-`SOURCE-ANALYSIS.json` records the exact graph used to create the package set.
 
 Compare the generated graph with the Forgejo organization API before a release:
 

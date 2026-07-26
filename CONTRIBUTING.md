@@ -44,9 +44,9 @@ corresponding tool in `tools/`; changes to packaging policy are hand-written.
 - Reference related issues or design decisions when relevant
 - Keep commit messages under 72 characters in the subject line
 - The body should explain *what* changed and *why*
-- Commit generated files (`nix/repositories.nix`, `locks/*.nix`,
-  `SOURCE-ANALYSIS.json`) *together* with the tool invocation that produced
-  them, so the diff tells a complete story
+- Commit generated files (`nix/repositories.nix`, `locks/*.nix`) *together*
+  with the tool invocation that produced them, so the diff tells a complete
+  story
 
 Example:
 

@@ -77,7 +77,7 @@ revision, rather than being forced through the Otter Zig 0.16 lock generator.
 
 `tools/pipeline.py update` is the canonical refresh path: it updates requested npins
 pins after auditing the live Forgejo repository set, regenerates the central
-graph and `SOURCE-ANALYSIS.json`, regenerates all recursive Zig locks, checks
+graph, regenerates all recursive Zig locks, checks
 compatibility substitutions against the remote sources, and runs the framework
 check. The framework also requires every coordinated release pin to carry one
 common tag version. The generators accept `--source-root` only for optional

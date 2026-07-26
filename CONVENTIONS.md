@@ -16,7 +16,7 @@ Shared rules for all AI agents working on this project.
 
 ## Generated vs Manual
 
-- **Strict separation.** Auto-generated files (pipeline outputs) live in `nix/repositories.nix`, `locks/otter-*.nix`, `locks/sources.nix`, `SOURCE-ANALYSIS.json`, `MANIFEST.sha256`. Never edit these by hand — they are produced by `tools/pipeline.py generate` and `tools/pipeline.py lock`.
+- **Strict separation.** Auto-generated files (pipeline outputs) live in `nix/repositories.nix`, `locks/otter-*.nix`, `locks/sources.nix`, `MANIFEST.sha256`. Never edit these by hand — they are produced by `tools/pipeline.py generate` and `tools/pipeline.py lock`.
 - **Hand-maintained files.** `nix/package-specs.nix`, `nix/packages.nix`, `modules/`, `patches/`, `examples/`. These are the developer's domain.
 - **No manual hash edits.** The pipeline owns all hashes. `--replace-fail` is non-negotiable — never weaken to `--replace`.
 - **No network at build time.** Nix sandbox is enforced. All sources pinned via npins. All Zig dependencies locked via fixed-output derivations.

@@ -1,8 +1,8 @@
 # Maintenance workflow
 
 This repository deliberately separates generated upstream facts from packaging
-policy. Keep that boundary intact: regenerate `nix/repositories.nix` and
-`SOURCE-ANALYSIS.json`; edit `nix/package-specs.nix` by hand.
+policy. Keep that boundary intact: regenerate `nix/repositories.nix` via
+`pipeline.py generate`; edit `nix/package-specs.nix` by hand.
 
 The current public surface is derived from 45 pinned Otter sources, 33 package
 specifications, 17 fixed-output external Zig sources, and the separately pinned

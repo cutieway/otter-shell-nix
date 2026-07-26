@@ -18,8 +18,7 @@
     libdrm = { name = "libdrm"; package = pkgs.libdrm; };
     egl = { name = "libglvnd"; package = pkgs.libglvnd; };
     glesv2 = { name = "libglvnd"; package = pkgs.libglvnd; };
-    # Supplied by stdenv/libc or only selected by non-default allocator options.
-    dl = null; m = null; pthread = null; rt = null; jemalloc = null; mimalloc = null;
+
   };
 
   namedDependencyMap = {
