@@ -75,7 +75,7 @@ development VT library needed by `otter-term`. Ghostty is built with the Nix
 recipe and Zig 0.15 dependency lock committed in the exact pinned Ghostty
 revision, rather than being forced through the Otter Zig 0.16 lock generator.
 
-`tools/update.sh` is the canonical refresh path: it updates requested npins
+`tools/pipeline.py update` is the canonical refresh path: it updates requested npins
 pins after auditing the live Forgejo repository set, regenerates the central
 graph and `SOURCE-ANALYSIS.json`, regenerates all recursive Zig locks, checks
 compatibility substitutions against the remote sources, and runs the framework
@@ -98,13 +98,13 @@ from scratch. That exceptional bootstrap sequence is:
 
 ```bash
 nix develop .#bootstrap
-./tools/pin-release.sh 0.11.43
-./tools/generate-repositories.py
-./tools/gen-locks.sh
+./tools/pipeline.py pin release 0.11.43
+./tools/pipeline.py generate
+./tools/pipeline.py lock
 nix build path:.#otter-bar
 ```
 
-`pin-release.sh` runs `npins init --bare` itself when necessary. No command
+`pipeline.py pin` runs `npins init --bare` itself when necessary. No command
 requires an already initialized `npins/` before entering the bootstrap shell.
 
 No bootstrap step is part of the consumer workflow.
@@ -125,7 +125,7 @@ flake's pinned `nixpkgs`.
 ## 9. Release integrity and remote gate
 
 `MANIFEST.sha256` describes the tracked public release tree without recursively
-hashing itself. `tools/check-manifest.py` verifies checksum syntax, path safety,
+hashing itself. `tools/pipeline.py check manifest` verifies checksum syntax, path safety,
 uniqueness, file presence, content, and—when Git metadata is available—exact
 coverage of every tracked path. It is regenerated only after the rest of a
 release is final.

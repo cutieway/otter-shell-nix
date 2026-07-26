@@ -20,8 +20,8 @@ jobs:
       - uses: NixOS/nix-installer-action@62c1943b776c509394b550f3f983adc14e9212d6 # main, 2026-07-13
       - name: Validate clean-checkout source metadata
         run: |
-          nix develop .#bootstrap --command python3 tools/check-source-compat.py
-          nix develop .#bootstrap --command python3 tools/generate-zig-locks.py --check
+          nix develop .#bootstrap --command python3 tools/pipeline.py check compat
+          nix develop .#bootstrap --command python3 tools/pipeline.py lock --check
       - name: Check flake
         run: |
           nix flake check --show-trace
@@ -29,7 +29,7 @@ jobs:
       - name: Build representative package
         run: nix build .#otter-bar .#otter-term --show-trace
       - name: Verify release manifest
-        run: nix develop .#bootstrap --command python3 tools/check-manifest.py
+        run: nix develop .#bootstrap --command python3 tools/pipeline.py check manifest
 
   aarch64-build:
     runs-on: ubuntu-24.04-arm

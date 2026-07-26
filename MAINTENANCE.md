@@ -13,16 +13,16 @@ generators resolve repositories through npins and do not require `repos/`.
 
 ```bash
 nix develop .#bootstrap
-./tools/update.sh
+./tools/pipeline.py update
 nix flake check path:. --show-trace
 ```
 
-`update.sh` first audits the live Forgejo organization, then updates all
+`pipeline.py update` first audits the live Forgejo organization, then updates all
 requested npins pins, regenerates the repository graph and source analysis from
 the fetched sources, regenerates every Zig lock closure, checks source
-substitutions, and runs `tools/check-framework.py`. The framework rejects a
+substitutions, and runs `tools/pipeline.py check framework`. The framework rejects a
 mixed coordinated release if upstream publishes tags only partially. Pin a
-subset by passing npins names, for example `./tools/update.sh otter_bar
+subset by passing npins names, for example `./tools/pipeline.py update otter_bar
 otter_ui`; graph and lock generation still cover the complete pinned Otter
 source set. Ghostty carries its own matching VT recipe and Zig 0.15 lock, so
 updating that pin advances the recipe and lock together.
@@ -31,23 +31,23 @@ updating that pin advances the recipe and lock together.
 
 ```bash
 nix develop
-./tools/audit-upstream.sh
-./tools/pin-release.sh 0.11.44
-./tools/generate-repositories.py
-./tools/gen-locks.sh
-python3 tools/check-source-compat.py
-python3 tools/check-framework.py
+./tools/pipeline.py audit
+./tools/pipeline.py pin release 0.11.44
+./tools/pipeline.py generate
+./tools/pipeline.py lock
+python3 tools/pipeline.py check compat
+python3 tools/pipeline.py check framework
 nix flake check path:. --show-trace
 ```
 
-`generate-repositories.py` can inspect each npins source independently. The
+`pipeline.py generate` can inspect each npins source independently. The
 release workflow above therefore needs no sibling workspace. A local workspace
 can optionally provide a deeper source-compatibility audit of cross-repository
 paths and Nix-specific source literals:
 
 ```bash
-./tools/check-source-compat.py --source-root /path/to/otter-sibling-workspace
-./tools/generate-zig-locks.py \
+./tools/pipeline.py check compat --source-root /path/to/otter-sibling-workspace
+./tools/pipeline.py lock \
   --source-root /path/to/otter-sibling-workspace --inventory-only
 ```
 
@@ -74,7 +74,7 @@ Review and commit these together:
 4. Add system libraries, native tools, or runtime tools to the maps in
    `nix/packages.nix` only when the generated graph or source audit requires
    them.
-5. Add a source-level assertion to `tools/check-source-compat.py` for every
+5. Add a source-level assertion to `tools/pipeline.py check compat` for every
    Nix-specific substitution.
 6. Generate locks and build the new package directly before adding it to a
    default tier.
@@ -91,14 +91,14 @@ Review and commit these together:
 - **Command not found at runtime:** add a narrow `runtimeTools` entry so only the
   affected executables receive a wrapped `PATH`.
 - **Hardcoded `/usr` path:** prefer a package output or NixOS wrapper and assert
-  the exact upstream literal in `check-source-compat.py`.
+  the exact upstream literal in `pipeline.py check compat`.
 - **Recorder asks for CUDA headers:** first determine whether upstream added a
   new dynamically loaded CUDA driver-API declaration. Extend the committed
   `nix/cuda-driver-abi.h` only for that stable ABI surface and keep the source
   compatibility assertions exact. Do not add an unfree CUDA SDK unless the
   recorder actually begins linking against the toolkit.
 - **Terminal Ghostty API mismatch:** verify that the Ghostty pin still exports
-  the APIs asserted by `tools/check-source-compat.py`. Use the recipe and lock
+  the APIs asserted by `tools/pipeline.py check compat`. Use the recipe and lock
   from that same Ghostty source revision; do not substitute the older
   `libghostty-vt` from nixpkgs.
 - **Patch no longer applies:** inspect the upstream change first. Removing a
@@ -110,10 +110,10 @@ A public release should pass, on both `x86_64-linux` and `aarch64-linux` where
 applicable:
 
 ```bash
-nix develop .#bootstrap --command python3 tools/check-source-compat.py
-nix develop .#bootstrap --command python3 tools/generate-zig-locks.py --check
-nix develop .#bootstrap --command python3 tools/check-framework.py
-nix develop .#bootstrap --command python3 tools/check-manifest.py
+nix develop .#bootstrap --command python3 tools/pipeline.py check compat
+nix develop .#bootstrap --command python3 tools/pipeline.py lock --check
+nix develop .#bootstrap --command python3 tools/pipeline.py check framework
+nix develop .#bootstrap --command python3 tools/pipeline.py check manifest
 nix flake check
 nix build .#otter-shell-core
 nix build .#otter-shell-extras
@@ -124,10 +124,10 @@ nix build .#otter-shell-all
 Regenerate `MANIFEST.sha256` only after the release tree is otherwise final:
 
 ```bash
-python3 tools/check-manifest.py --write
+python3 tools/pipeline.py check manifest --write
 ```
 
-`tools/check-manifest.py` excludes the manifest itself, rejects malformed,
+`pipeline.py check manifest` excludes the manifest itself, rejects malformed,
 duplicate, unsafe, missing, extra, or stale entries, and checks exact tracked
 file coverage when run from Git. The committed GitHub workflow runs this from a
 clean checkout. It also checks remote source substitutions and committed Zig

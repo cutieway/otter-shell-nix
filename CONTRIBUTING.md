@@ -18,10 +18,10 @@ corresponding tool in `tools/`; changes to packaging policy are hand-written.
    - `chore/` — maintenance, tooling, CI
 
 2. **Run checks before opening a PR:**
+
    ```bash
    nix develop .#bootstrap
-   python3 tools/check-framework.py
-   shellcheck tools/*.sh
+   python3 tools/pipeline.py check all
    nix flake check
    ```
 
@@ -33,6 +33,7 @@ corresponding tool in `tools/`; changes to packaging policy are hand-written.
    `DESIGN.md`, or module option descriptions).
 
 5. **Run `nixfmt`** on any modified `.nix` files before committing:
+
    ```bash
    nix fmt
    ```
@@ -48,6 +49,7 @@ corresponding tool in `tools/`; changes to packaging policy are hand-written.
   them, so the diff tells a complete story
 
 Example:
+
 ```
 fix: reject unknown tool names at build time
 
@@ -60,23 +62,27 @@ assertion so typos or missing entries fail early.
 ## Code style
 
 ### Nix
+
 - Format with `nixfmt` before committing
 - Use `let-in` over `rec` for attribute sets that need self-reference
 - Prefer `builtins.*` for core operations; `lib.*` for everything else
 - Use `lib.types.*` for module option types; add `description` to every
   option
 - Assertions should produce actionable error messages:
+
   ```nix
   assert lib.assertMsg (condition) "module: expected X but got Y";
   ```
 
 ### Python
+
 - Use `pathlib.Path` for filesystem operations
 - Prefer `subprocess.run` with command lists over shell strings
 - Main entry points should have `if __name__ == "__main__":`
 - Catch specific exceptions, not bare `except:`
 
 ### Shell
+
 - `set -euo pipefail` in every script
 - Quote all variable expansions
 - Use `mktemp` for temporary files, with `trap` cleanup

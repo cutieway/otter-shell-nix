@@ -10,12 +10,11 @@ projects report version `0.11.43` and minimum Zig `0.16.0`.
 The following remote-only structural checks pass in the generation environment:
 
 ```text
-python3 tools/generate-repositories.py --check
-python3 tools/generate-zig-locks.py --check
-python3 tools/check-source-compat.py
-python3 tools/check-framework.py
-shellcheck tools/*.sh
-python3 -m py_compile tools/*.py
+python3 tools/pipeline.py generate --check
+python3 tools/pipeline.py lock --check
+python3 tools/pipeline.py check compat
+python3 tools/pipeline.py check framework
+python3 -m py_compile tools/pipeline.py
 ```
 
 These commands resolve the Otter repositories through npins. No `repos/`
@@ -68,11 +67,11 @@ The static checks cover:
 An edited sibling workspace can be checked without making it a release input:
 
 ```bash
-python3 tools/generate-repositories.py \
+python3 tools/pipeline.py generate \
   --source-root /path/to/otter-workspace --check
-python3 tools/check-source-compat.py \
+python3 tools/pipeline.py check compat \
   --source-root /path/to/otter-workspace
-python3 tools/generate-zig-locks.py \
+python3 tools/pipeline.py lock \
   --source-root /path/to/otter-workspace --inventory-only
 ```
 
@@ -88,7 +87,7 @@ pinned development VT API and its upstream dependency lock match the Otter
 source. The out-of-release `otter-hypr` main pin also builds after its guarded
 `Theme.csd` compatibility adaptation.
 
-A selected-pin `./tools/update.sh ghostty` run also completed in the clean
+A selected-pin `./tools/pipeline.py update ghostty` run also completed in the clean
 checkout: the live 45-repository Forgejo set matched, npins refreshed the
 remote pin, all seven Otter lock closures were regenerated with 17 unique
 sources, and the coordinated-release, source-compatibility, and framework gates
@@ -97,12 +96,12 @@ passed without a local workspace.
 The committed clean-checkout gate is:
 
 ```bash
-nix develop .#bootstrap --command python3 tools/check-source-compat.py
-nix develop .#bootstrap --command python3 tools/generate-zig-locks.py --check
+nix develop .#bootstrap --command python3 tools/pipeline.py check compat
+nix develop .#bootstrap --command python3 tools/pipeline.py lock --check
 nix flake check --show-trace
 nix eval .#packages.aarch64-linux.otter-bar.drvPath --raw
 nix build .#otter-bar .#otter-term --show-trace
-nix develop .#bootstrap --command python3 tools/check-manifest.py
+nix develop .#bootstrap --command python3 tools/pipeline.py check manifest
 ```
 
 The GitHub workflow runs those checks from tracked remote content, evaluates

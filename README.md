@@ -77,9 +77,9 @@ is useful when creating a new fork from scratch:
 
 ```bash
 nix develop .#bootstrap
-./tools/pin-release.sh 0.11.43
-./tools/generate-repositories.py
-./tools/gen-locks.sh
+./tools/pipeline.py pin release 0.11.43
+./tools/pipeline.py generate
+./tools/pipeline.py lock
 nix build path:.#otter-bar
 ```
 
@@ -99,9 +99,9 @@ For coordinated development heads instead of a release:
 
 ```bash
 nix develop .#bootstrap
-./tools/pin-heads.sh
-./tools/generate-repositories.py
-./tools/gen-locks.sh
+./tools/pipeline.py pin heads
+./tools/pipeline.py generate
+./tools/pipeline.py lock
 ```
 
 ## Updating
@@ -110,11 +110,11 @@ The normal remote-only refresh is:
 
 ```bash
 nix develop .#bootstrap
-./tools/update.sh
+./tools/pipeline.py update
 nix flake check
 ```
 
-`update.sh` updates the requested npins sources, regenerates
+`pipeline.py update` updates the requested npins sources, regenerates
 `nix/repositories.nix` and `SOURCE-ANALYSIS.json` from those fetched pins,
 regenerates the complete recursive Zig lock set, checks source compatibility,
 and runs the framework gate. Before changing pins it audits the live Forgejo
@@ -125,18 +125,18 @@ recipe and dependency lock advance in the same source pin.
 For a new coordinated release:
 
 ```bash
-./tools/pin-release.sh 0.11.44
-./tools/generate-repositories.py
-./tools/gen-locks.sh
-python3 tools/check-source-compat.py
-python3 tools/check-framework.py
+./tools/pipeline.py pin release 0.11.44
+./tools/pipeline.py generate
+./tools/pipeline.py lock
+python3 tools/pipeline.py check compat
+python3 tools/pipeline.py check framework
 nix flake check
 ```
 
 Selected pin updates still regenerate the graph and complete lock set:
 
 ```bash
-./tools/update.sh otter_bar otter_ui otter_render
+./tools/pipeline.py update otter_bar otter_ui otter_render
 ```
 
 Review source revisions, generated graph changes, and lock diffs together.
@@ -145,9 +145,9 @@ Local sibling checkouts are optional diagnostics only. To compare the committed
 remote-derived metadata with an edited workspace or extracted snapshot:
 
 ```bash
-./tools/generate-repositories.py --source-root /path/to/otter-workspace
-./tools/check-source-compat.py --source-root /path/to/otter-workspace
-./tools/generate-zig-locks.py \
+./tools/pipeline.py generate --source-root /path/to/otter-workspace
+./tools/pipeline.py check compat --source-root /path/to/otter-workspace
+./tools/pipeline.py lock \
   --source-root /path/to/otter-workspace --inventory-only
 ```
 
@@ -156,7 +156,7 @@ remote-derived metadata with an edited workspace or extracted snapshot:
 Compare the generated graph with the Forgejo organization API before a release:
 
 ```bash
-./tools/audit-upstream.sh
+./tools/pipeline.py audit
 ```
 
 This reports newly added or removed repositories, exits non-zero on drift, and

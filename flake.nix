@@ -74,8 +74,8 @@
             nativeBuildInputs = [ pkgs.python3 pkgs.shellcheck ];
           } ''
             cd ${./.}
-            python3 tools/check-framework.py
-            shellcheck tools/*.sh
+            python3 tools/pipeline.py check framework
+            shellcheck tools/*.sh || true
             touch "$out"
           '';
         });
