@@ -22,6 +22,8 @@ import re
 import shutil
 import subprocess
 import sys
+import time
+import urllib.request
 import tarfile
 import tempfile
 from collections.abc import Iterable
@@ -159,8 +161,8 @@ def first(pattern: str, text: str, path: Path) -> str:
     return match.group(1)
 
 
-def npins_get_path(pin: str) -> Path:
-    """Resolve npins pin to a store path, with nix builtin fallback."""
+def _npins_get_path_once(pin: str) -> Path:
+    """Single resolution attempt; raises SystemExit on any failure."""
     try:
         output = str(subprocess.check_output(["npins", "get-path", pin], cwd=ROOT, text=True, timeout=120).strip())
         if output:
@@ -206,6 +208,26 @@ def npins_get_path(pin: str) -> Path:
     except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as e:
         raise SystemExit(f"could not resolve npins source {pin}: {e}") from e
     raise SystemExit(f"resolved path is not a directory for {pin}")
+
+
+def npins_get_path(pin: str, attempts: int = 3) -> Path:
+    """Resolve npins pin to a store path, with nix builtin fallback.
+
+    Retries transient fetch failures with backoff: CI runners hit slow
+    links and rate limits, and a single failed fetch must neither fail the
+    run nor silently drop a repository (see _find_sources).
+    """
+    delay = 10
+    while True:
+        try:
+            return _npins_get_path_once(pin)
+        except SystemExit as e:
+            attempts -= 1
+            if attempts <= 0:
+                raise
+            print(f"warning: retrying {pin} ({attempts} left): {e}", file=sys.stderr)
+            time.sleep(delay)
+            delay *= 2
 
 
 # ---------------------------------------------------------------------------
