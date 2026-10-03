@@ -242,7 +242,12 @@ def _find_sources(source_root: Path | None) -> dict[str, Path]:
             continue
         try:
             source = npins_get_path(pin_name)
-        except SystemExit:
+        except SystemExit as e:
+            # Never skip silently: a dropped repo regenerates a different
+            # graph, which surfaces downstream as a confusing "stale
+            # repositories.nix" diff that hides the real fetch failure.
+            # Cold stores (CI) hit this when a fetch errors or times out.
+            print(f"warning: skipping {pin_name}: {e}", file=sys.stderr)
             continue
         if (source / "build.zig.zon").is_file():
             result[pin_name.replace("_", "-")] = source
