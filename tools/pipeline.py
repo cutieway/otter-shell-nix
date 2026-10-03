@@ -38,8 +38,12 @@ SRI_SHA256 = re.compile(r"^sha256-[A-Za-z0-9+/]{43}=$")
 ALLOWED_URL_PREFIXES = (
     "https://github.com/",
     "https://gitlab.com/",
+    "https://gitlab.freedesktop.org/",
     "https://codeberg.org/",
+    "https://deps.files.ghostty.org/",
+    "https://download.savannah.gnu.org/",
     "https://git.pika-os.com/",
+    "https://www.unicode.org/",
 )
 # Strict git ref fragment pattern: alphanumeric, dots, dashes, underscores, slashes.
 GIT_REF_PATTERN = re.compile(r"^[A-Za-z0-9._/\-]+$")
@@ -731,6 +735,7 @@ def _check_framework() -> None:
     packages_text = (ROOT / "nix/packages.nix").read_text()
     maps_text = (ROOT / "nix/lib/dependency-maps.nix").read_text()
     fixups_text = (ROOT / "nix/lib/package-source-fixups.nix").read_text()
+    builder_text = (ROOT / "nix/lib/mk-zig-package.nix").read_text()
     flake_text = (ROOT / "flake.nix").read_text()
 
     repos = set(re.findall(r'^\s*"(otter-[^"]+)"\s*=\s*\{', repos_text, re.MULTILINE))
@@ -1037,8 +1042,13 @@ def _check_framework() -> None:
         err.append("otter-rec does not inject the committed CUDA driver ABI shim")
     if 'ghosttySource.outPath + "/nix/libghostty-vt.nix"' not in packages_text or "ghosttyVt" not in packages_text:
         err.append("pinned Ghostty VT recipe is not wired into package dependencies")
-    if "'theme.decorations.' 'theme.csd.'" not in specs_text:
-        err.append("otter-hypr titlebar theme compatibility patch is missing")
+    # Semantic theme roles landed upstream in 0.11.113: otter-hypr draws from
+    # theme.colors/theme.layout directly, so the old decorations->csd rename
+    # must stay out (it would --replace-fail: neither namespace exists).
+    if "dontStrip = true" not in builder_text:
+        err.append("Zig builder must set dontStrip: GNU strip corrupts Zig/LLD 21 binaries")
+    if "'theme.decorations.' 'theme.csd.'" in specs_text:
+        err.append("stale otter-hypr theme rename: upstream uses semantic color roles")
     if "assist.model" not in home_module_text or '"--model"' not in home_module_text:
         err.append("Home Manager does not require and pass an otter-assist model")
     if "pulse.enable = true;" not in module_text:
@@ -1060,16 +1070,14 @@ SOURCE_COMPAT_EXPECTED: dict[str, tuple[str, ...]] = {
         'elif [ -d "$llama/.git" ]; then',
         "-march=x86-64-v3",
     ),
-    "otter-assist/build.zig": ("/usr/lib/otter-assist/",),
+    "otter-assist/build.zig": ('.install_subdir = "lib/otter-assist/indexes",',),
     "otter-assist/src/main.zig": ("/usr/lib/otter-assist/",),
     "otter-assist/src/config.zig": ("/usr/lib/otter-assist/",),
     "otter-config-types/src/assist.zig": ("/usr/lib/otter-assist/",),
     "otter-config-types/src/root.zig": ("/usr/lib/otter-assist/",),
     "otter-hypr/src/draw.zig": (
-        "theme.decorations.titlebar_bg_active",
-        "theme.decorations.titlebar_bg_inactive",
-        "theme.decorations.button_close_bg",
-        "theme.decorations.titlebar_text_active",
+        'SurfaceId.namedComptime("titlebar.background")',
+        "theme.layout.panel_radius",
     ),
     "otter-settings/src/app_config.zig": ("/usr/bin/tee",),
     "otter-rec/src/kms_client.zig": ('"setcap"', '"pkexec"'),
@@ -1080,7 +1088,7 @@ SOURCE_COMPAT_EXPECTED: dict[str, tuple[str, ...]] = {
         'git clone https://github.com/mudler/parakeet.cpp "$vendor"',
         'git -C "$vendor" submodule update --init --recursive',
     ),
-    "otter-theme/src/theme.zig": ("pub const CSD = struct", "csd: CSD = .{}"),
+    "otter-theme/src/theme.zig": ("pub const Colors = struct", "colors: Colors = .{},"),
     "otter-render/src/font/resolve.zig": ("/usr/share/fonts/otter-shell/",),
     "otter-render/build.zig": ("break :blk fontconfig_c.createModule();",),
     "otter-render/vendor/zigimg/src/simd.zig": (
@@ -1202,10 +1210,10 @@ def _check_compat(source_root: Path | None) -> None:
         err.append("otter-render/fonts/DejaVuSans.ttf is missing")
 
     if source_root is not None:
-        vox_build = local.resolve_one("otter-vox") / "build.zig"
+        vox_ggml = local.resolve_one("otter-vox") / "scripts/build-ggml.sh"
     else:
-        vox_build = npins_get_path("otter_vox") / "build.zig"
-    if not vox_build.is_file() or "-mavx2" not in vox_build.read_text():
+        vox_ggml = npins_get_path("otter_vox") / "scripts/build-ggml.sh"
+    if not vox_ggml.is_file() or "-march=x86-64-v3" not in vox_ggml.read_text():
         err.append("otter-vox AVX2 assumption changed; review its platform restriction")
 
     if err:

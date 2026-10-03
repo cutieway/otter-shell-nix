@@ -3,10 +3,58 @@
 { fetchgit, fetchurl, fetchzip }:
 
 {
+  "N-V-__8AAAzZywE3s51XfsLbP9eyEw57ae9swYB9aGB6fCMs" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/wuffs-122037b39d577ec2db3fd7b2130e7b69ef6cc1807d68607a7c232c958315d381b5cd.tar.gz";
+      hash = "sha256-nkzSCr6W5sTG7enDBXEIhgEm574uLD41UVR2wlC+HBM=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAB0eQwD-0MdOEBmz7intriBReIsIDNlukNVoNu6o" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/zlib-1220fed0c74e1019b3ee29edae2051788b080cd96e90d56836eea857b0b966742efb.tar.gz";
+      hash = "sha256-F+iIY/NgBnKrSRgvIXKBtvxNPHYr3jYZNeQ2qVIU0Fw=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AABzkUgISeKGgXAzgtutgJsZc0-kkeqBBscJgMkvy" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/glslang-12201278a1a05c0ce0b6eb6026c65cd3e9247aa041b1c260324bf29cee559dd23ba1.tar.gz";
+      hash = "sha256-FKLtu1Ccs+UamlPj9eQ12/WXFgS0uDPmPmB26MCpl7U=";
+    };
+    sourceIsArchive = true;
+  };
+
   "N-V-__8AACSdYAB_UbYSe21ZcD-qFBX7twJ4mRDPTrekTXQF" = {
     source = fetchurl {
       url = "https://github.com/glennrp/libpng/archive/refs/tags/v1.6.57.tar.gz";
       hash = "sha256-TLt7B0btwWg8lYGzczZelVEzt/EkPxcbfRU1tEFd/ts=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AADYiAAB_80AWnH1AxXC0tql9thT-R-DYO1gBqTLc" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/pixels-12207ff340169c7d40c570b4b6a97db614fe47e0d83b5801a932dcd44917424c8806.tar.gz";
+      hash = "sha256-Veg7FtCRCCUCvxSb9FfzH0IJLFmCZQ4/+657SIcb8Ro=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AADcZkgn4cMhTUpIz6mShCKyqqB-NBtf_S2bHaTC-" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/gettext-0.24.tar.gz";
+      hash = "sha256-yRhQPVk9cNr0hE0XWhPYFq+stmfAb7oeydzVACwVGLc=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAEbOfQBnvcFcCX2W5z7tDaN8vaNZGamEQtNOe0UI" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/N-V-__8AAEbOfQBnvcFcCX2W5z7tDaN8vaNZGamEQtNOe0UI.tar.gz";
+      hash = "sha256-yBbCDox18+Fa6Gc1DnmSVQLRpqhZOLsac7iSfl8x+cs=";
     };
     sourceIsArchive = true;
   };
@@ -20,10 +68,74 @@
     };
   };
 
+  "N-V-__8AAFdWDwA0ktbNUi9pFBHCRN4weXIgIfCrVjfGxqgA" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/N-V-__8AAFdWDwA0ktbNUi9pFBHCRN4weXIgIfCrVjfGxqgA.tar.gz";
+      hash = "sha256-3S3xSrX0EDgleq7cxLX7msDuAY8/D5SvkJcCjmDTMiM=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAG02ugUcWec-Ndp-i7JTsJ0dgF8nnJRUInkGLG7G" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/harfbuzz-11.0.0.tar.xz";
+      hash = "sha256-8WNRuv4hRyX+LB1bWfDZPkmQWkskeJn7kNcM/5U6K5s=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAG3RoQEyRC2Vw7Qoro5SYBf62IHn3HjqtNVY6aWK" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/libxml2-2.11.5.tar.gz";
+      hash = "sha256-bCgFni4+60K1tLFkieORamNGwQladP7jvGXNxdiaYhU=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAGmZhABbsPJLfbqrh6JTHsXhY6qCaLAQyx25e0XE" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/highway-66486a10623fa0d72fe91260f96c892e41aceb06.tar.gz";
+      hash = "sha256-h9T4iT704I8iSXNgj/6/lCaKgTgLp5wS6IQZaMgKohI=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAGxKBAAjYkT1jYUiOZDXQuj0u34ndIjAWxiR1KX9" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/ghostty-themes-release-20260720-153658-97e244c.tgz";
+      hash = "sha256-cynQ4ulY7oQE5RamVQvQczTtxhEzSnP4TVBHfapFnww=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAHjwMQDBXnLq3Q2QhaivE0kE2aD138vtX2Bq1g7c" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/oniguruma-1220c15e72eadd0d9085a8af134904d9a0f5dfcbed5f606ad60edc60ebeccd9706bb.tar.gz";
+      hash = "sha256-ABqhIC54RI9MC/GkjHblVodrNvFtks4yB+zP1h2Z8qA=";
+    };
+    sourceIsArchive = true;
+  };
+
   "N-V-__8AAI4ANwDM8MWhHTUFLKfvLE_n2NQk6mh0sFDzhTqO" = {
     source = fetchurl {
       url = "https://github.com/madler/zlib/archive/refs/tags/v1.3.2.tar.gz";
       hash = "sha256-uZoLhsC6k2DsfnjE8eQ7HL3x5pNsj6D2g1wM1pSklaE=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAIC5lwAVPJJzxnCAahSvZTIlG-HhtOvnM1uh-66x" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/JetBrainsMono-2.304.tar.gz";
+      hash = "sha256-xXppHouCrQmLWWPzlZAy5AOPORCHr3cViFulkEYQXMQ=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAIrfdwARSa-zMmxWwFuwpXf1T3asIN7s5jqi9c1v" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/fontconfig-2.14.2.tar.gz";
+      hash = "sha256-O6LdkhWHGKzsXKrxpxYEO1qgVcJ7CB2RSvPMtA3OilU=";
     };
     sourceIsArchive = true;
   };
@@ -44,6 +156,46 @@
     sourceIsArchive = true;
   };
 
+  "N-V-__8AAJrvXQCqAT8Mg9o_tk6m0yf5Fz-gCNEOKLyTSerD" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/libpng-1220aa013f0c83da3fb64ea6d327f9173fa008d10e28bc9349eac3463457723b1c66.tar.gz";
+      hash = "sha256-/syVtGzwXo4/yKQUdQ4LparQDYnp/fF16U/wQcrxoDo=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAKLKpwC4H27Ps_0iL3bPkQb-z6ZVSrB-x_3EEkub" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/freetype-1220b81f6ecfb3fd222f76cf9106fecfa6554ab07ec7fdc4124b9bb063ae2adf969d.tar.gz";
+      hash = "sha256-QnIB9dUVFnDQXB9bRb713aHy592XHvVPD+qqf/0quQw=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAKYZBAB-CFHBKs3u4JkeiT4BMvyHu3Y5aaWF3Bbs" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/plasma_wayland_protocols-12207e0851c12acdeee0991e893e0132fc87bb763969a585dc16ecca33e88334c566.tar.gz";
+      hash = "sha256-XFi6IUrNjmvKNCbcCLAixGqN2Zeymhs+KLrfccIN9EE=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAKrHGAAs2shYq8UkE6bGcR1QJtLTyOE_lcosMn6t" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/wayland-9cb3d7aa9dc995ffafdbdef7ab86a949d0fb0e7d.tar.gz";
+      hash = "sha256-6kGR1o5DdnflHzqs3ieCmBAUTpMdOXoyfcYDXiw5xQ0=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAKw-DAAaV8bOAAGqA0-oD7o-HNIlPFYKRXSPT03S" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/wayland-protocols-258d8f88f2c8c25a830c6316f87d23ce1a0f12d9.tar.gz";
+      hash = "sha256-XO3K3egbdeYPI+XoO13SuOtO+5+Peb16NH0UiusFMPg=";
+    };
+    sourceIsArchive = true;
+  };
+
   "N-V-__8AALTJcQJ3hosujokSgxYTsa3q1mDZ2dasYhuJwaOV" = {
     source = fetchurl {
       url = "https://www.unicode.org/Public/zipped/16.0.0/UCD.zip";
@@ -52,10 +204,58 @@
     sourceIsArchive = true;
   };
 
+  "N-V-__8AALiNBAA-_0gprYr92CjrMj1I5bqNu0TSJOnjFNSr" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/gtk4-layer-shell-1.1.0.tar.gz";
+      hash = "sha256-mChCgSYKXu9bT2OlXxbEv2p4ihAgptsDfssPcfozaYg=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AALw2uwF_03u4JRkZwRLc3Y9hakkYV7NKRR9-RIZJ" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/breakpad-b99f444ba5f6b98cac261cbb391d8766b34a5918.tar.gz";
+      hash = "sha256-bMqYlD0amQdmzvYQd8Ca/1k4Bj/heh7+EijlQSttatk=";
+    };
+    sourceIsArchive = true;
+  };
+
   "N-V-__8AAMV2BgB9aKHnchADe5onASuvEqAeRRO7Ai1oTuzW" = {
     source = fetchurl {
       url = "https://github.com/allyourcodebase/valgrind.h/archive/refs/tags/3.23.0.tar.gz";
       hash = "sha256-MLyxrVhfqhibCEuDOL3hSUJbXJMEi0jLxDO46Xt6IL4=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAMVLTABmYkLqhZPLXnMl-KyN38R8UVYqGrxqO26s" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/NerdFontsSymbolsOnly-3.4.0.tar.gz";
+      hash = "sha256-EWTRuVbUveJI17LwmYxDzJT1ICQxoVZKeTiVsec7DQQ=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AANT61wB--nJ95Gj_ctmzAtcjloZ__hRqNw5lC1Kr" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/DearBindings_v0.17_ImGui_v1.92.5-docking.tar.gz";
+      hash = "sha256-i/7FAOAJJvZ5hT7iPWfMOS08MYFzPKRwRzhlHT9wuqM=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AANb6pwD7O1WG6L5nvD_rNMvnSc9Cpg1ijSlTYywv" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/spirv_cross-1220fb3b5586e8be67bc3feb34cbe749cf42a60d628d2953632c2f8141302748c8da.tar.gz";
+      hash = "sha256-tStvz8Ref6abHwahNiwVVHNETizAmZVVaxVsU7pmV+M=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "N-V-__8AAPlZGwBEa-gxrcypGBZ2R8Bse4JYSfo_ul8i2jlG" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/sentry-1220446be831adcca918167647c06c7b825849fa3fba5f22da394667974537a9c77e.tar.gz";
+      hash = "sha256-KsZJfMjWGo0xCT5HrduMmyxFsWsHBbszSoNbZCPDGN8=";
     };
     sourceIsArchive = true;
   };
@@ -69,6 +269,14 @@
     };
   };
 
+  "aro-0.0.0-JSD1Qk8rOQDnuVcD4jAwMpHitA6pADRKzQ7M7hKRwxvD" = {
+    source = fetchurl {
+      url = "https://github.com/vancluever/arocc/archive/ecbc5c799574e0da2758a961b12efa586007f03c.tar.gz";
+      hash = "sha256-qlRIe9cn6Po2dE/wqCTe2y9MpF9MLU2dJDfPX9PQrRo=";
+    };
+    sourceIsArchive = true;
+  };
+
   "freetype-2.14.3-C3-WdXSKAAB-kHs4qgRoeoFnRkNQn6M_SSlUGZ6ywgBQ" = {
     source = fetchgit {
       url = "https://github.com/allyourcodebase/freetype";
@@ -76,6 +284,23 @@
       fetchSubmodules = false;
       hash = "sha256-G8tz/q/u5iMrHqM4DAeFECpIkgLHRbQcvLtHgaObghE=";
     };
+  };
+
+  "ghostty-1.3.2-dev-5UdBC77jPAVhNK7BJBrcGwNVvAYqeOUYAUUaoAw6Lifr" = {
+    source = fetchgit {
+      url = "https://github.com/ghostty-org/ghostty.git";
+      rev = "9ed61428daa9f15b2dc89e73f9fe0d16d3a6bb71";
+      fetchSubmodules = false;
+      hash = "sha256-44lZqmDpcVlkBNlPa+LFzvrkDHqrJm0DMTSGJTN7mTg=";
+    };
+  };
+
+  "gobject-0.3.2-Skun7F6HogCMynX2JqeSHS7xr-8pK4ob-qRFIcEasVi3" = {
+    source = fetchurl {
+      url = "https://github.com/ghostty-org/zig-gobject/releases/download/0.10.0-2026-07-28-36-1/ghostty-gobject-0.10.0-2026-07-28-36-1.tar.zst";
+      hash = "sha256-kBTbVw2wbj+/z623syqordrMaWnnAWUGg8HHRCitumw=";
+    };
+    sourceIsArchive = true;
   };
 
   "harfbuzz-14.1.0-Ip1VAuGZAAC1jdxPHOMPoHyi-50Hm_q4bveaVflELHGw" = {
@@ -96,6 +321,22 @@
     };
   };
 
+  "libxev-0.0.0-86vtcwIRFADbH4hk-EjROXxlrKIRPQdA41XiTSytYO-F" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/libxev-9ce8e8e6ff89e583258a7f8e7adeeeaeae8611bf.tar.gz";
+      hash = "sha256-4rmyJM14EBFWq7j0ZHmlH2zOZsSBXGMoVuIKFEDdArc=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "translate_c-0.0.0-Q_BUWmU6BwB_9JKG2l2W7i_mhmYWeRseTGBEHi_YlV5f" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/translate_c-80f8b6e4f45a303268717d8e5f4f91d7837138bb.tar.gz";
+      hash = "sha256-OMnlnVjzbjSB9vo48R/lnGPBJJL8zzmcpW89/M4XtT4=";
+    };
+    sourceIsArchive = true;
+  };
+
   "translate_c-0.0.0-Q_BUWpf0BgAwrh5AM-acJcslN_YPEhcoCVKbbNjwuUTJ" = {
     source = fetchgit {
       url = "https://codeberg.org/ziglang/translate-c";
@@ -114,6 +355,23 @@
     };
   };
 
+  "vaxis-0.6.0-BWNV_CrbCQCscGpzsAlR402rYQ_tV3aAl081c2iRRkka" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/vaxis-1dbbe575dff4586fe51e3217aa5c3fecdcbb6089.tar.gz";
+      hash = "sha256-PqBQ6QWIfEa8oaLBjkHW7fV0wapuv7xc88UoRideT6g=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "vaxis-0.6.0-BWNV_MjFCQCs9UDHiRkrgw_ayeiPkzOe4xVbaAqXkUWW" = {
+    source = fetchgit {
+      url = "https://github.com/rockorager/libvaxis.git";
+      rev = "c1e1f23be38951c425cdf31af455ba23ef178940";
+      fetchSubmodules = false;
+      hash = "sha256-bIXu8lGwGo42QbItC0jOi/eN7u+f4snknBexw7dc0DI=";
+    };
+  };
+
   "wayland-0.6.0-dev-lQa1krD8AQBlMqwuhAMJjPQKXvpRByZBxxqMVAZ7yzbG" = {
     source = fetchgit {
       url = "https://codeberg.org/ifreund/zig-wayland";
@@ -121,6 +379,22 @@
       fetchSubmodules = false;
       hash = "sha256-B5nA05xYm6iRDDRFC2KUbhBCtjwmApka+BcDCZRssfw=";
     };
+  };
+
+  "wayland-0.6.0-lQa1kqz8AQADQmdNJsNhLoNHcnEGEUjrOaPV-dtEnEmX" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/wayland-0.6.0-lQa1kqz8AQADQmdNJsNhLoNHcnEGEUjrOaPV-dtEnEmX.tar.gz";
+      hash = "sha256-dZpjLjapSODkEtLXSkOmnS805l1AKJoWr3qjclhS7yU=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "z2d-0.12.1-j5P_Hsw8EQAKyZTQICCQnAH2xYkLDW8k9uefbsYdfPZ-" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/z2d-7dbae85c81784dba9988320bf9543ed9a81350c8.tar.gz";
+      hash = "sha256-5VydCxVu2t3+oy+xwONZfhtjBrmk7BiI4vgAjFmLztg=";
+    };
+    sourceIsArchive = true;
   };
 
   "zeit-0.6.0-5I6bk7q6AgBdMJxze3D4l9ylQhkviQ_BX9FigDt13MFn" = {
@@ -132,12 +406,45 @@
     };
   };
 
+  "zf-0.11.0-OIRy8X-RAAAwaRXHMYpj2uvBnuGTZWEE_3V7acqHQNtW" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/zf-c35c421f84895193246db06c40683c1a30e616ef.tar.gz";
+      hash = "sha256-ykvBCf2dl87a4vW9uHnMeMNG1DwUo046Kr0u6SCMhUc=";
+    };
+    sourceIsArchive = true;
+  };
+
   "zhl-1.0.0-6W1vbr6gTgFLwri8jcX_C_qHgolHrZLmWtQPmYJz52oU" = {
     source = fetchurl {
       url = "https://github.com/ferrreo/zhl/archive/refs/tags/v0.0.1.tar.gz";
       hash = "sha256-EJdcR1cjMZm1zxPe3OoQFpKBHagPudrLGytquBblNqE=";
     };
     sourceIsArchive = true;
+  };
+
+  "zig_js-0.0.0-rjCAV7-GAADvMTBL7lPMuvDk7xgS9PCMIZWiOUXLZSlj" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/zig_js-3c23860e47fdcdc5af805efb7fd0bdac5fd3e9bc.tar.gz";
+      hash = "sha256-ov9IiiRDAfTllGmlIyqtaGmwGsxQ99ftJkfAKaV9Szs=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "zig_objc-0.0.0-Ir_Sp9gsAQCPAJc0oF5xoWePHWP6Y6tCphDeyNUThJoi" = {
+    source = fetchurl {
+      url = "https://deps.files.ghostty.org/zig_objc-c8de82ff80281215ad92900866dab7103a8efa8b.tar.gz";
+      hash = "sha256-gx6uxVS7I+8gIp8ecF2PU+iinIKYQLuND17bBcdtbfA=";
+    };
+    sourceIsArchive = true;
+  };
+
+  "zigimg-0.1.0-8_eo2oyaFwBZwJpmqPkCfVXWBrHcqbYwmrp1I6bTD3lI" = {
+    source = fetchgit {
+      url = "https://github.com/zigimg/zigimg";
+      rev = "d695acd97c02e57bb151e8f659d1280f5cd6ca70";
+      fetchSubmodules = false;
+      hash = "sha256-0IYATQldT6eJxRR2T/2CsIYZuzomqjvmdVyjmsjguyE=";
+    };
   };
 
   "zlib-1.3.2-ZZQ7lc8NAAAHm9MDfplvwoesXvk4tVm6VCsiI8KnIbT0" = {

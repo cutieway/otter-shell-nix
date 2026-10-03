@@ -9,9 +9,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "66fed652a148cda9d8ea90b1b34ae9768871dbd9",
-      "url": "https://github.com/ghostty-org/ghostty/archive/66fed652a148cda9d8ea90b1b34ae9768871dbd9.tar.gz",
-      "hash": "sha256-JYe8CS+vFY63dE1yYXKgO8a2D7Rt4Wi4JsS7rxamZRE="
+      "revision": "befcdfd2c3a1cb24d9ec886e93c95b2b5daa7028",
+      "url": "https://github.com/ghostty-org/ghostty/archive/befcdfd2c3a1cb24d9ec886e93c95b2b5daa7028.tar.gz",
+      "hash": "sha256-kEz4SWZWDAkg8H8oKEjvxiDRXxSUQ+Y6BkeBwXFQN6Y="
     },
     "otter_assist": {
       "type": "GitRelease",
@@ -25,10 +25,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "bafa2744039d77157743d55156721ef857d1ceeb",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-assist/archive/v0.11.53.tar.gz",
-      "hash": "sha256-ldKqdpdWHCA3DUmR+XuUeuPG/2Eof95Hk+qxdugD0V4="
+      "version": "v0.11.113",
+      "revision": "f003ee49bde17346bd4b6156b9f81888dd85457a",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-assist/archive/v0.11.113.tar.gz",
+      "hash": "sha256-lpLvGSphQq/szS8NDVIdhIrSNIBwY+d4+SDCIEJCTa4="
     },
     "otter_assistant": {
       "type": "GitRelease",
@@ -42,10 +42,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "1aec004b948ffd5282aaa354d789aaed180fbaa1",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-assistant/archive/v0.11.53.tar.gz",
-      "hash": "sha256-46zOaXVRGEBrYc+lsU4ZKRiQkwAAhARvkj0MioKX8nw="
+      "version": "v0.11.113",
+      "revision": "141b8bb80afdbe45dd170920adb04b04950fc7cc",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-assistant/archive/v0.11.113.tar.gz",
+      "hash": "sha256-v5tIe3NDnCuww4hFDSkZZyuzJQfNS/86AwRkw50xqJI="
     },
     "otter_bar": {
       "type": "GitRelease",
@@ -59,10 +59,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "325fd868e27f46d7e0c2056d9b3eca69525abfad",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-bar/archive/v0.11.53.tar.gz",
-      "hash": "sha256-xrm4lyQ2QJwdvu7WTIh+SI5dnsvWw8y9IhcrJZRpQkE="
+      "version": "v0.11.113",
+      "revision": "e26e2020c49bca3cb98f6a6f26346fc3f9640cac",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-bar/archive/v0.11.113.tar.gz",
+      "hash": "sha256-PlxSTKWyOWQFhVR3T5k97YXdjIonJMmXc3UImB4kfl4="
     },
     "otter_cal": {
       "type": "GitRelease",
@@ -76,10 +76,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "085225e1c0cb7f8ed8e67e6f747789e212bfca9f",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-cal/archive/v0.11.53.tar.gz",
-      "hash": "sha256-CW0o86jKUEXUy3Ht6IK+M44WRrwLYb3wNEzRp+Mz8bs="
+      "version": "v0.11.113",
+      "revision": "375a4cfe6b9753f74c5c2c07e5fbd38f1c43e0f9",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-cal/archive/v0.11.113.tar.gz",
+      "hash": "sha256-vfYyYr+JBiygv8ssboO2+RuTFet3MY6vlCZzfBKScOw="
     },
     "otter_calc": {
       "type": "GitRelease",
@@ -93,10 +93,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "9cbaf00ae21584d1cc85f781ab1ed95667e6896e",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-calc/archive/v0.11.53.tar.gz",
-      "hash": "sha256-3z7R5yYdxc0u7XlPzTRzmXnz6RgNWOV3ZUPcmrc+dWc="
+      "version": "v0.11.113",
+      "revision": "69c21f3325c958227d4a4e7bc624f3d4ec98f668",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-calc/archive/v0.11.113.tar.gz",
+      "hash": "sha256-tRXe6JGMv5yf7AtIpjL6PE9OywLRo/eb5K7PWC0JWlw="
     },
     "otter_clicker": {
       "type": "GitRelease",
@@ -110,10 +110,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "2e49d2a5839705745390c803dcc435bac014a3bf",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-clicker/archive/v0.11.53.tar.gz",
-      "hash": "sha256-G1HZbHVytwV6xEVyanbWKQTw4Q1nCOyNa/RBIH1NgNg="
+      "version": "v0.11.113",
+      "revision": "eaf850b8d04864270b81191a9625204d60f7d736",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-clicker/archive/v0.11.113.tar.gz",
+      "hash": "sha256-j1Qkrgn50CKcRNxc9nGPYboTBeCM1r6tkQAv6oomnZQ="
     },
     "otter_clip": {
       "type": "GitRelease",
@@ -127,10 +127,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "65cd16a27df12ecc3baa6302e8479668e12ba8b2",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-clip/archive/v0.11.53.tar.gz",
-      "hash": "sha256-P0Zj9KcKlPi3kLGKi7rrK9gTOL0K7sRgFdrcmElDH7Y="
+      "version": "v0.11.113",
+      "revision": "f6b52c5d24c5dd5d85d7916ede0e30096d6d7471",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-clip/archive/v0.11.113.tar.gz",
+      "hash": "sha256-mxhV6DppGFaIaVa/C3W6+N04UPa/lvLWLtLSeJcEFAI="
     },
     "otter_conf": {
       "type": "GitRelease",
@@ -144,10 +144,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "c35700a1bd7444ca4aa711eff6dcb65729ac633d",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-conf/archive/v0.11.53.tar.gz",
-      "hash": "sha256-Gjn765RFcXcONCoo72yPM6tZxSPDfVxOCtZR451HMTE="
+      "version": "v0.11.113",
+      "revision": "1cbbb4f89ab818f92a3d14c0e0e78748603f3885",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-conf/archive/v0.11.113.tar.gz",
+      "hash": "sha256-/lw1HRR5/FzoDXIFf+0WoRPwHo6/NfGyzBoB8zogVPo="
     },
     "otter_config_types": {
       "type": "GitRelease",
@@ -161,10 +161,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "2a8d8a75738b98b1b75666b61fcfe146b064ee90",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-config-types/archive/v0.11.53.tar.gz",
-      "hash": "sha256-qkulnU8ZgklthEichyElfutAbczN/9WPtIMB5Sn6gZA="
+      "version": "v0.11.113",
+      "revision": "a0ee89611ed07a7cfd7f54517a81dda25a5f1476",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-config-types/archive/v0.11.113.tar.gz",
+      "hash": "sha256-aK78jvdzjmzZlTgda5IhSH5r1aZO7t764RFWv1wStDU="
     },
     "otter_desktop": {
       "type": "GitRelease",
@@ -178,10 +178,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "432fde43654095b9aadd17c9154ffce5239be15d",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-desktop/archive/v0.11.53.tar.gz",
-      "hash": "sha256-K3YwD6t6zNOj8tfPl/DV42VrQiiQ9GNG2/1J0RfTOyM="
+      "version": "v0.11.113",
+      "revision": "5d32420dfdc38cebef8e1a49223a0c3e5298f5fc",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-desktop/archive/v0.11.113.tar.gz",
+      "hash": "sha256-Nl4rZNEyw/E84L/mSRclq4iffgc2OWVuqJkuANMF+pg="
     },
     "otter_emoji": {
       "type": "GitRelease",
@@ -195,10 +195,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "fa7839fce476bdec6f1768c5fa6167d5266d3bf0",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-emoji/archive/v0.11.53.tar.gz",
-      "hash": "sha256-Kpm9Y/0e2LtOjTQ2jL0kEApxEq2HoPhux/XM6TnKz8o="
+      "version": "v0.11.113",
+      "revision": "a96ee0dbac179c09e9d0092b3fb0f7a612fd73b2",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-emoji/archive/v0.11.113.tar.gz",
+      "hash": "sha256-jvhImUKEjr/dL9qIMvjEirv22NVhL/Ff7qz00CuNRLo="
     },
     "otter_examples": {
       "type": "Git",
@@ -210,9 +210,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "f67444ea96acb956dfddf59e7505eab9bcade49c",
-      "url": "https://git.pika-os.com/otter-shell/otter-examples/archive/f67444ea96acb956dfddf59e7505eab9bcade49c.tar.gz",
-      "hash": "sha256-qc87LBbNwa/anUlKxvZrHWbCwyqsdg+2fw1g6eX8+1Q="
+      "revision": "dc3ec71b1f2995ac253b063af8eea070af4c3232",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-examples/archive/dc3ec71b1f2995ac253b063af8eea070af4c3232.tar.gz",
+      "hash": "sha256-cZ8VJ1ZsLzjSYvcYZVIUsKc8J2Fb/mwUtvjRp02Jx2g="
     },
     "otter_geo": {
       "type": "GitRelease",
@@ -226,10 +226,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "2b3d3d892538a3ac3890b62ec81451f98e529423",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-geo/archive/v0.11.53.tar.gz",
-      "hash": "sha256-rv1O/hQ6JDc8CMd/dkQfSVb3rWLYpA/z97hDaO32WOM="
+      "version": "v0.11.113",
+      "revision": "58bfd613e4ae74c62b57e8e0a850db4d3090fb7e",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-geo/archive/v0.11.113.tar.gz",
+      "hash": "sha256-uBoo3t5FrQ5Oah3GDhsDPoQhAmr7DFJGsyQn+nj5lNk="
     },
     "otter_greeter": {
       "type": "GitRelease",
@@ -243,10 +243,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "334118294eea48dd3b073bc1e1ee86836ea6ac8a",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-greeter/archive/v0.11.53.tar.gz",
-      "hash": "sha256-dKYx9SF1r5bqz2CHOaVGIGgJ39vccEA7TLKn2jQE6qo="
+      "version": "v0.11.113",
+      "revision": "47a37041f1afd76100d9e5b72b074ee78763c041",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-greeter/archive/v0.11.113.tar.gz",
+      "hash": "sha256-It7msiOSXeutr2WSovlttmwB1dRzT7XMW+oMAjs+bWs="
     },
     "otter_hypr": {
       "type": "Git",
@@ -258,9 +258,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "6fbd1da1d4ecde8ad58b3d4d90426683bc58dcd0",
-      "url": "https://git.pika-os.com/otter-shell/otter-hypr/archive/6fbd1da1d4ecde8ad58b3d4d90426683bc58dcd0.tar.gz",
-      "hash": "sha256-sT594Cu2V5P7F7EMF4HF0TMHSE7WK7iItfpn34TMl+c="
+      "revision": "dade4cb37f8e5d9785ca0e226ee9cb1fb6aeb30a",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-hypr/archive/dade4cb37f8e5d9785ca0e226ee9cb1fb6aeb30a.tar.gz",
+      "hash": "sha256-T0rtAgn09fOJ3T7pi5Uem2WIuRgKdUyuOdM+36LGIzk="
     },
     "otter_idle": {
       "type": "GitRelease",
@@ -274,10 +274,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "6b02e942ba59840d8d5d24caba12fada4399436f",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-idle/archive/v0.11.53.tar.gz",
-      "hash": "sha256-VGdAcMPAmJ6CtpZJaa/IBJaxqf7edAM6RJEiaOPzqp0="
+      "version": "v0.11.113",
+      "revision": "4e6cee591104666d3302beed814ceefc710502ba",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-idle/archive/v0.11.113.tar.gz",
+      "hash": "sha256-W3egYC62nD6rQu3FD2a1NuHJhxnVIf7Hsqw4+oUPaoU="
     },
     "otter_jade": {
       "type": "GitRelease",
@@ -291,10 +291,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "dba24fa4bd0ae99274f3db214f7fbad5fb79ab7a",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-jade/archive/v0.11.53.tar.gz",
-      "hash": "sha256-KkYDOLwNwGY3xcNnv/UMqV56dG35n9N6nlCHypyEWAE="
+      "version": "v0.11.113",
+      "revision": "0e133534b69ff90022eedbe6b5c06e279eb3fcf1",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-jade/archive/v0.11.113.tar.gz",
+      "hash": "sha256-p3liDnyEQMtIF/VB4wAFa6pkB/3ajlaDFgpVzb9ZHos="
     },
     "otter_launcher": {
       "type": "GitRelease",
@@ -308,10 +308,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "a3e9db7da0d401afeb2f3673edddebfe4ab847db",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-launcher/archive/v0.11.53.tar.gz",
-      "hash": "sha256-s1qur8jEDbCt6KuvEG1gxxIadLOLW0c/lgZ54AiRrjQ="
+      "version": "v0.11.113",
+      "revision": "0925efaf2b26d117ae29d7739b2ddfd1184d3c04",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-launcher/archive/v0.11.113.tar.gz",
+      "hash": "sha256-+A11hmduLITzXIQJx2ofbCoP67p3129KWXsQZfXMhvQ="
     },
     "otter_lock": {
       "type": "GitRelease",
@@ -325,10 +325,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "2c111743ec05a305b69256a1462564bde9ce889c",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-lock/archive/v0.11.53.tar.gz",
-      "hash": "sha256-z7ZeCxSWXtkuCKDfw6nXebG/AGPuo0jP1hWtVB+7nqU="
+      "version": "v0.11.113",
+      "revision": "148e278b230062a869a79c42efcec45ebe90dd59",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-lock/archive/v0.11.113.tar.gz",
+      "hash": "sha256-sLtnp1JigPGPZ7QRmnDsIvZ/QDAM7uLHfQWdnJt5O0U="
     },
     "otter_logout": {
       "type": "GitRelease",
@@ -342,10 +342,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "30e21c515fbb1be4341d1e1537b26631f31e3322",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-logout/archive/v0.11.53.tar.gz",
-      "hash": "sha256-yMaQsJJm/bF8wh91T+B3n4Z8W19AbEv83xBqHSOGFHo="
+      "version": "v0.11.113",
+      "revision": "1cd36fd5d3ff6aba95e6104ea7913569f3b1dd65",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-logout/archive/v0.11.113.tar.gz",
+      "hash": "sha256-Yk3ZM8RmyK3jiitPn7wncPBYxKk85vny4H6DPhmw1aA="
     },
     "otter_monitor": {
       "type": "GitRelease",
@@ -359,10 +359,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "1f27a9e337abf0fa2ce7cfcabbebc5bd57c57015",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-monitor/archive/v0.11.53.tar.gz",
-      "hash": "sha256-vpeSC8jzfZnOiwS48N/U6l7Zxik+zeBOMIlTLU6jN9o="
+      "version": "v0.11.113",
+      "revision": "6e72a85cca536c0fc8408961d82d4e213ad06437",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-monitor/archive/v0.11.113.tar.gz",
+      "hash": "sha256-FCrvfZLyM+kEwjDHCS+4iIwZ9Dx0ANUDsZqp8qtJsu0="
     },
     "otter_note": {
       "type": "GitRelease",
@@ -376,10 +376,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "23a7a49de17d6b2dc98fe2ad6d49296b00f8ca7e",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-note/archive/v0.11.53.tar.gz",
-      "hash": "sha256-SMqa/Z0ekfod76ACHswPvMOKaW0gzGCHjzv1I93UzL8="
+      "version": "v0.11.113",
+      "revision": "a9075569cdc22fb1781e8b94514d4247df6f7ecf",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-note/archive/v0.11.113.tar.gz",
+      "hash": "sha256-mWspaCWntiRULZO0X9xvvx/skkIjXOxFMhXdlkudz1w="
     },
     "otter_notifications": {
       "type": "GitRelease",
@@ -393,10 +393,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "9285aa71590baf0d861443fd0c8a534586282d71",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-notifications/archive/v0.11.53.tar.gz",
-      "hash": "sha256-A/S33YChJCRcgUQE23CwtIpwjdh/HgFNe7jC21D6Y5c="
+      "version": "v0.11.113",
+      "revision": "b23dda46f20c5e228f68433dc4452f01557b7a83",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-notifications/archive/v0.11.113.tar.gz",
+      "hash": "sha256-HL9CR2Bl+sSEwUtT1zQjlONmOfXCf9gYoOLXThoyqmc="
     },
     "otter_osd": {
       "type": "GitRelease",
@@ -410,10 +410,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "3043af58e736d933752dbb7dbad7922619b756ab",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-osd/archive/v0.11.53.tar.gz",
-      "hash": "sha256-gXxXT+c9esmChDR9bhzhkhUWiWpxNApRV5OM2IJ36G0="
+      "version": "v0.11.113",
+      "revision": "c0ec79bfffca23a3489ef641c66dbb6aa2b98de2",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-osd/archive/v0.11.113.tar.gz",
+      "hash": "sha256-cZ068KCKqP1jxk6E4ty5wcZcWleoftnhr5YoJBE5+oA="
     },
     "otter_pick": {
       "type": "GitRelease",
@@ -427,10 +427,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "80bab423858a4be430b7148d3b74b8461892d183",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-pick/archive/v0.11.53.tar.gz",
-      "hash": "sha256-KVRAWaTpXCTbojKeWeXrNGeUewEk0BIcaIvmkxalQOY="
+      "version": "v0.11.113",
+      "revision": "8afc8c01f55f6bd23df2c37a55d82e2c92251aa4",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-pick/archive/v0.11.113.tar.gz",
+      "hash": "sha256-xaPp3xML+3Fl2kN5uUAPF2wWcVEDSwN3s0oU5/kN8+c="
     },
     "otter_polkit": {
       "type": "GitRelease",
@@ -444,10 +444,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "79849620536dc854fad56ab9206e6062989fd2b9",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-polkit/archive/v0.11.53.tar.gz",
-      "hash": "sha256-gVw/1N6oSkb27dx/72KlknT91mG1YH+5Bf49rIdQ/W4="
+      "version": "v0.11.113",
+      "revision": "4cda055eade78828cf872022962f3dddb4badd0d",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-polkit/archive/v0.11.113.tar.gz",
+      "hash": "sha256-vyQFPQhk7nqIFUA42kDJIDvpqe/ooHN80K0VCv/duAs="
     },
     "otter_rec": {
       "type": "GitRelease",
@@ -461,10 +461,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "cb94b765ab11ef5830d5a347181299df9b7f4823",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-rec/archive/v0.11.53.tar.gz",
-      "hash": "sha256-WPLTP72YWPgsciTC4kV46c1YALaha87FkYj9ufLmJCE="
+      "version": "v0.11.113",
+      "revision": "61fd78884c82cac3896673dca8b1624b7f6abed7",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-rec/archive/v0.11.113.tar.gz",
+      "hash": "sha256-8VA8laEp+gFkRbUq6m46AA2WGJHkxrm7yDDFOL+mems="
     },
     "otter_render": {
       "type": "GitRelease",
@@ -478,10 +478,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "96d17fb8a9ac3965781fe28f2fab759be0dc3148",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-render/archive/v0.11.53.tar.gz",
-      "hash": "sha256-7CV7K+3UCFGJS59NHnlrdWl01hwYioWEgV3t9/3L400="
+      "version": "v0.11.113",
+      "revision": "dbabbfa0a6bbd0ac81b4dafb26d999788921e757",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-render/archive/v0.11.113.tar.gz",
+      "hash": "sha256-vJRuy3Aig4ruQqp8HIPIjJERzLT3iEQgQIgsXeqKYkA="
     },
     "otter_screenshot": {
       "type": "GitRelease",
@@ -495,10 +495,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "bb23a39485e4d10bfd35ddcd517a16f22477659a",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-screenshot/archive/v0.11.53.tar.gz",
-      "hash": "sha256-pKG5O7FWF0xvx65ejTsjX0z7adm77KyQmt1WGM5U6Lk="
+      "version": "v0.11.113",
+      "revision": "8bad9020c0b400c5b2b5b7e544d5ba25e1f1eec2",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-screenshot/archive/v0.11.113.tar.gz",
+      "hash": "sha256-o7UmnaubYfX72GrRIAykSYGEOxR0j9inpObbXpa+0c0="
     },
     "otter_search": {
       "type": "GitRelease",
@@ -512,10 +512,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "b3ef2a669f4425f09c50ce786236afb56f1aa49e",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-search/archive/v0.11.53.tar.gz",
-      "hash": "sha256-XoR6AYUhuRB5mTScXnJihSrF4pzQtZPZDl1b7mBkN2o="
+      "version": "v0.11.113",
+      "revision": "eec93d4028da52ee6b68a85d38c036c2376304bd",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-search/archive/v0.11.113.tar.gz",
+      "hash": "sha256-uq/j0Z2/acnqd8E8TOXrSBICkMIQCOpuAsTiForv3Cs="
     },
     "otter_settings": {
       "type": "GitRelease",
@@ -529,10 +529,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "f3dcd844ee33e7b20a48a1009cef17e686425aa0",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-settings/archive/v0.11.53.tar.gz",
-      "hash": "sha256-EFm03h7qsfuqpZQDqAlBS+VGVtVzrtsfy+TD5py9onA="
+      "version": "v0.11.113",
+      "revision": "cefdf45394f8d93134ac2a37afedb4807d5d84e7",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-settings/archive/v0.11.113.tar.gz",
+      "hash": "sha256-gFOUcKLExI6LordJE+KUWsXt7cj499Q1cFuZTZEpKo8="
     },
     "otter_shot": {
       "type": "GitRelease",
@@ -546,10 +546,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "3fffdfdc4719c2d14526d6f0d3295a350e608de4",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-shot/archive/v0.11.53.tar.gz",
-      "hash": "sha256-WtdrnVjLS3lg/2SMUNWcyWaJXbJDyh5ZhZ6DuW5n3gA="
+      "version": "v0.11.113",
+      "revision": "b843d5db98134d3cdaf42aaed87fd4597d3ac0d0",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-shot/archive/v0.11.113.tar.gz",
+      "hash": "sha256-pwZby01/7JEK6JYl9klO1drjI/mWDS1E4HgETVFf9SQ="
     },
     "otter_term": {
       "type": "GitRelease",
@@ -563,10 +563,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "468b5f557f5fc7e707cca7e3f0dfebc2d51f00a2",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-term/archive/v0.11.53.tar.gz",
-      "hash": "sha256-4sMizdCO0kN0530cGmaZ+rt9Pf4+RLgJ/dX8QAf2N8s="
+      "version": "v0.11.113",
+      "revision": "e22bc1c2e202cbc8cb8dcc3148941a0a7e04d0b9",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-term/archive/v0.11.113.tar.gz",
+      "hash": "sha256-4UrSf1igUICubMkhN9skdV3e0VSOQmWq86S2ipT/jvw="
     },
     "otter_theme": {
       "type": "GitRelease",
@@ -580,10 +580,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "29f43a02e2dbe41035e1f8a8b7feac35550e2556",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-theme/archive/v0.11.53.tar.gz",
-      "hash": "sha256-OjcBMTSzchYS2eqLIpm4n8I11G5HoKtFcPLZcs4V2ts="
+      "version": "v0.11.113",
+      "revision": "545b7e47ae69fbcd6b3f28ae2e768ea893db963a",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-theme/archive/v0.11.113.tar.gz",
+      "hash": "sha256-Fs1W0fmp9f4vAXzl/ov/yumKnO0YQpmzUT8zM//JsHQ="
     },
     "otter_theme_gen": {
       "type": "GitRelease",
@@ -597,10 +597,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "89ac326c8f7fae0289a7c0c3386dd7ce30d15cc8",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-theme-gen/archive/v0.11.53.tar.gz",
-      "hash": "sha256-fvy8DAwzyBDiOrPb/4oS4bRhDWwjucmajHEtk821LVI="
+      "version": "v0.11.113",
+      "revision": "4711feb2eba32ad37a9d819765c54c26353f1627",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-theme-gen/archive/v0.11.113.tar.gz",
+      "hash": "sha256-MssRFAuf23+kv/KKhQHKwVwJ4VNcvRl8EKDk9DfHK3c="
     },
     "otter_timer": {
       "type": "GitRelease",
@@ -614,10 +614,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "d07ee0f7d2de06ea521dda76132570ba57cae807",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-timer/archive/v0.11.53.tar.gz",
-      "hash": "sha256-TUeo7jVt+/3AQozf48io4t4/8YkWqG86U1gs3/V2Z80="
+      "version": "v0.11.113",
+      "revision": "14cbf37eccf7d4e5d1d722a03df62925a0a9c0bf",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-timer/archive/v0.11.113.tar.gz",
+      "hash": "sha256-6IrRSC0lBF/PEHRfHd/rkV4KyRbrxhqY1PcTfxbhtww="
     },
     "otter_tools_core": {
       "type": "GitRelease",
@@ -631,10 +631,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "eba0f4ef4f8855ec3f4deca186f7f94e988713bf",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-tools-core/archive/v0.11.53.tar.gz",
-      "hash": "sha256-WiAS5wxGUyqvAAxjXqh6h9cksM0EaOA2Acwl+j+7czg="
+      "version": "v0.11.113",
+      "revision": "d99b5ddc69596773858360d3a741d3d91fba3b81",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-tools-core/archive/v0.11.113.tar.gz",
+      "hash": "sha256-R6AMQW3AGu9BhAzcKDDWpZrU86Sd7sBIJ02jBLwUyxc="
     },
     "otter_transcribe": {
       "type": "GitRelease",
@@ -648,10 +648,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "e553e8b18db8a5f7b5c74a05377829c496bac836",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-transcribe/archive/v0.11.53.tar.gz",
-      "hash": "sha256-56f7nWtpdnzoDnkrWLZtqx3wPPah3gvkjdJBvPomS1c="
+      "version": "v0.11.113",
+      "revision": "ef237bf41fc728f1263fc75843ee2548d60ac296",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-transcribe/archive/v0.11.113.tar.gz",
+      "hash": "sha256-1v9euPHRHMZxr9lmrJF192ezbWT2lMcXAGXGNEkINOY="
     },
     "otter_ui": {
       "type": "GitRelease",
@@ -665,10 +665,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "9bd5b3a56a15c57893d44be09bee39ae30e38903",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-ui/archive/v0.11.53.tar.gz",
-      "hash": "sha256-jqjIfFtsiKMapFZBPKeneme/r8npCbKTuZJhxzVKlqA="
+      "version": "v0.11.113",
+      "revision": "c3eaf8998d865b66029473368adcba38f62ffc72",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-ui/archive/v0.11.113.tar.gz",
+      "hash": "sha256-3mlh+y4ZPc3BXcDt/tUTgcH2QsTUcUzb8sZI8wOMdlk="
     },
     "otter_utils": {
       "type": "GitRelease",
@@ -682,10 +682,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "1e6f5400509f5a25849459638a83e0a7c9ecb7c8",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-utils/archive/v0.11.53.tar.gz",
-      "hash": "sha256-Q6u3J1MpEVXUAW6TNQibLRkQTTqp7BhY6gxeLJmF1Ig="
+      "version": "v0.11.113",
+      "revision": "125aa8121e7de35736b48ae76b0b29aea1c2365c",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-utils/archive/v0.11.113.tar.gz",
+      "hash": "sha256-SWDWZkN1yPd9MtI+CnFeI3BEgE32e3qMYwHv7ElJH1o="
     },
     "otter_vox": {
       "type": "GitRelease",
@@ -699,10 +699,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "6e0020ce7870c1b0389e1f562164ac94772900de",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-vox/archive/v0.11.53.tar.gz",
-      "hash": "sha256-4pmSAS+Ew5rlHkGRtpS+379wbjWPdZz6rM+4c2IhA2U="
+      "version": "v0.11.113",
+      "revision": "247a4aee185cc55c739efbc959b1a49160f04080",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-vox/archive/v0.11.113.tar.gz",
+      "hash": "sha256-p+MHoK0SY4+ShoM1Bkf7Iq0o3rRH1FnVav2tCNXyiaY="
     },
     "otter_vte": {
       "type": "GitRelease",
@@ -716,10 +716,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "944c93c30ad7adffccb3f3cbfbbe0c386f2e5318",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-vte/archive/v0.11.53.tar.gz",
-      "hash": "sha256-HddoGdWFVR+YtzHtmKbxm6iSL4oitz1nsUiMw3ddH7s="
+      "version": "v0.11.113",
+      "revision": "9fad75d79392aff7dde87f79b2623b0c47a887c7",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-vte/archive/v0.11.113.tar.gz",
+      "hash": "sha256-comXe1r3Y0CvdVX3aEmJsvTdtRv9vlaO/fvpZsh0kQU="
     },
     "otter_wallpaper": {
       "type": "GitRelease",
@@ -733,10 +733,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "3c3e608d4441cbdb4da4afc473e35f86b7c10743",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-wallpaper/archive/v0.11.53.tar.gz",
-      "hash": "sha256-t+dav0o4puLWb6QQQy1c+Rf3pO4yywF0jTxSQxIa8UI="
+      "version": "v0.11.113",
+      "revision": "a082b6528256eee1298c473c1a50d2faabc479d5",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-wallpaper/archive/v0.11.113.tar.gz",
+      "hash": "sha256-2i6/jfBtrgZQJ4ferBIpfnDT2A5hrLmuXV6Mcl7j/Z8="
     },
     "otter_wayland": {
       "type": "GitRelease",
@@ -750,10 +750,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "c9d0e3b52937b891ab5cc424a575c2bf93aea87e",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-wayland/archive/v0.11.53.tar.gz",
-      "hash": "sha256-IJaKtbyLAvfsJIslXpF5IBUpqU+eXiQA8997JCWSHaA="
+      "version": "v0.11.113",
+      "revision": "0ff30f8b1f5ed52bb9acedf2e39cf9da59091114",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-wayland/archive/v0.11.113.tar.gz",
+      "hash": "sha256-/bDpLFlbpJY8s94nk0ZrXOnRUZbdSkN2FJDDQHg7iGQ="
     },
     "otter_weather": {
       "type": "GitRelease",
@@ -767,10 +767,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.11.53",
-      "revision": "cf46fd87897e06a42689e74af8c64b0b1b60f301",
-      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-weather/archive/v0.11.53.tar.gz",
-      "hash": "sha256-Uy/B1H9WbqcSS+CMwIisAMd7and8BdbF4Jx5S2aMG6k="
+      "version": "v0.11.113",
+      "revision": "82e4e9a1fbaa8167b2b7fd34500ffc75fa70042b",
+      "url": "https://git.pika-os.com/api/v1/repos/otter-shell/otter-weather/archive/v0.11.113.tar.gz",
+      "hash": "sha256-MO4yYzkBNDbgKODlZMD0SorY8WgJp9U2Zw/WMXoCUuU="
     },
     "parakeet_cpp": {
       "type": "Git",
@@ -781,9 +781,9 @@
       },
       "branch": "master",
       "submodules": true,
-      "revision": "1da853421de9710cbe894a0110711de5a0516486",
+      "revision": "11c1a0fc00556d390987e651217f9fc7caa4c4f7",
       "url": null,
-      "hash": "sha256-KVer3cSnvH7ny+jTNZ1t9rGBeCw3FquM5HruF1X/kTY="
+      "hash": "sha256-FwexrjdZyXM1U1h+SfQ/61BcJeoiBwuukMzQkXP1Kl0="
     }
   },
   "version": 8

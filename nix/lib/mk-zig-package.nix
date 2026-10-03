@@ -78,7 +78,7 @@ pkgs.stdenv.mkDerivation {
 
   src = workspace;
 
-  nativeBuildInputs = [ zig pkgs.pkg-config ]
+  nativeBuildInputs = [ zig pkgs.pkg-config pkgs.patchelf ]
     ++ lib.optional (runtimeInputs != [ ]) pkgs.makeWrapper
     ++ nativeBuildInputs;
   inherit buildInputs;
@@ -140,6 +140,67 @@ pkgs.stdenv.mkDerivation {
     runHook postCheck
   '';
 
+  # Upstream core libraries (otter-utils, otter-ui, ...) now link as shared
+  # objects. Zig emits those into its local cache and records the cache
+  # directory in the binary RPATH. The cache lives under /build, which must
+  # not leak into the closure, and the libraries must ship in $out/lib or
+  # the binaries cannot start. Harvest every DT_NEEDED entry that is not
+  # already satisfied from the store, then drop the /build RPATH entries.
+  # This runs in preFixup: fixupPhase rejects /build references, so the
+  # rewrite must land before its checks.
+  preFixup = ''
+    cacheDir="''${ZIG_LOCAL_CACHE_DIR:-$TMPDIR/zig-local-cache}"
+    if [ -d "$out/bin" ] && [ -d "$cacheDir" ]; then
+      harvested=0
+      while IFS= read -r -d "" bin; do
+        if ! old_rpath="$(patchelf --print-rpath "$bin" 2>/dev/null)"; then
+          continue
+        fi
+        store_dirs="$(printf '%s' "$old_rpath" | tr ':' '\n' | grep -v '^/build' || true)"
+        # The Nix glibc loader also resolves libraries relative to itself
+        # (e.g. libc.so.6 lives next to ld-linux). Mirror that lookup so
+        # loader-resolved libraries are not mistaken for missing ones.
+        interp="$(patchelf --print-interpreter "$bin" 2>/dev/null || true)"
+        if [ -n "$interp" ]; then
+          store_dirs="$store_dirs""$(printf '\n%s/../lib' "$(dirname "$interp")")"
+        fi
+        while IFS= read -r needed; do
+          [ -n "$needed" ] || continue
+          satisfied=0
+          while IFS= read -r dir; do
+            if [ -n "$dir" ] && [ -e "$dir/$needed" ]; then satisfied=1; break; fi
+          done <<< "$store_dirs"
+          [ "$satisfied" = 1 ] && continue
+          [ -e "$out/lib/$needed" ] && continue
+          hit="$(find "$cacheDir" -name "$needed" 2>/dev/null | sort | head -n 1 || true)"
+          if [ -z "$hit" ]; then
+            echo "otter-shell-nix: cannot satisfy $bin needs $needed" >&2
+            exit 1
+          fi
+          mkdir -p "$out/lib"
+          cp -L "$hit" "$out/lib/$needed"
+          chmod 755 "$out/lib/$needed"
+          harvested=1
+        done < <(patchelf --print-needed "$bin" 2>/dev/null || true)
+      done < <(find "$out/bin" -maxdepth 1 -type f -perm -0100 -print0 2>/dev/null || true)
+      if [ "$harvested" = 1 ]; then
+        while IFS= read -r -d "" elf; do
+          if ! old_rpath="$(patchelf --print-rpath "$elf" 2>/dev/null)"; then
+            continue
+          fi
+          new_rpath="$(printf '%s' "$old_rpath" | tr ':' '\n' | { grep -v '^/build' || true; } | tr '\n' ':' | sed 's/:$//')"
+          case ":$new_rpath:" in
+            *":$out/lib:"*) ;;
+            *) new_rpath="$new_rpath:$out/lib" ;;
+          esac
+          if [ "$old_rpath" != "$new_rpath" ]; then
+            patchelf --set-rpath "$new_rpath" "$elf"
+          fi
+        done < <(find "$out/bin" "$out/lib" -maxdepth 1 -type f -perm -0100 -print0 2>/dev/null || true)
+      fi
+    fi
+  '';
+
   postFixup = lib.optionalString (runtimeInputs != [ ]) ''
     while IFS= read -r -d "" program; do
       wrapProgram "$program" \
@@ -147,5 +208,12 @@ pkgs.stdenv.mkDerivation {
     done < <(find "$out/bin" -maxdepth 1 -type f -perm -0100 -print0 2>/dev/null || true)
   '';
 
+  # GNU strip corrupts binaries emitted by Zig's LLD 21 backend: it relocates
+  # .dynsym to end-of-file without updating its address, so the loader cannot
+  # resolve any dynamic symbol and _start jumps to NULL (SIGSEGV before main).
+  # Only some layouts trip it, but any package can grow into the bad shape, so
+  # stripping stays off for every Zig package. Zig already compresses debug
+  # sections; the retained symbols also keep crash reports actionable.
+  dontStrip = true;
   inherit meta passthru;
 }

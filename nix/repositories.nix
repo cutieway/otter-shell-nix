@@ -2,7 +2,7 @@
 {
   "otter-assist" = {
     pin = "otter_assist";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-tools-core" "otter-utils" ];
     hasRemoteDeps = false;
@@ -10,7 +10,7 @@
   };
   "otter-assistant" = {
     pin = "otter_assistant";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-geo" "otter-render" "otter-theme" "otter-tools-core" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = true;
@@ -18,7 +18,7 @@
   };
   "otter-bar" = {
     pin = "otter_bar";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -26,7 +26,7 @@
   };
   "otter-cal" = {
     pin = "otter_cal";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-tools-core" ];
     hasRemoteDeps = false;
@@ -34,7 +34,7 @@
   };
   "otter-calc" = {
     pin = "otter_calc";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-tools-core" ];
     hasRemoteDeps = false;
@@ -42,15 +42,15 @@
   };
   "otter-clicker" = {
     pin = "otter_clicker";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
-    directDeps = [ "otter-conf" "otter-config-types" "otter-utils" "otter-wayland" ];
+    directDeps = [ "otter-conf" "otter-config-types" "otter-theme" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
     systemLibraries = [ "wayland-client" ];
   };
   "otter-clip" = {
     pin = "otter_clip";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-tools-core" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -58,7 +58,7 @@
   };
   "otter-conf" = {
     pin = "otter_conf";
-    snapshotVersion = "1.11.53";
+    snapshotVersion = "1.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-utils" ];
     hasRemoteDeps = false;
@@ -66,7 +66,7 @@
   };
   "otter-config-types" = {
     pin = "otter_config_types";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-geo" "otter-render" ];
     hasRemoteDeps = false;
@@ -74,7 +74,7 @@
   };
   "otter-desktop" = {
     pin = "otter_desktop";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-utils" ];
     hasRemoteDeps = true;
@@ -82,7 +82,7 @@
   };
   "otter-emoji" = {
     pin = "otter_emoji";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-tools-core" ];
     hasRemoteDeps = false;
@@ -98,7 +98,7 @@
   };
   "otter-geo" = {
     pin = "otter_geo";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [  ];
     hasRemoteDeps = false;
@@ -106,7 +106,7 @@
   };
   "otter-greeter" = {
     pin = "otter_greeter";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = true;
@@ -122,7 +122,7 @@
   };
   "otter-idle" = {
     pin = "otter_idle";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -130,7 +130,7 @@
   };
   "otter-jade" = {
     pin = "otter_jade";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -138,7 +138,7 @@
   };
   "otter-launcher" = {
     pin = "otter_launcher";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-tools-core" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -146,7 +146,7 @@
   };
   "otter-lock" = {
     pin = "otter_lock";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = true;
@@ -154,7 +154,7 @@
   };
   "otter-logout" = {
     pin = "otter_logout";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -162,7 +162,7 @@
   };
   "otter-monitor" = {
     pin = "otter_monitor";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -170,7 +170,7 @@
   };
   "otter-note" = {
     pin = "otter_note";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-geo" "otter-render" "otter-theme" "otter-tools-core" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -178,7 +178,7 @@
   };
   "otter-notifications" = {
     pin = "otter_notifications";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -186,7 +186,7 @@
   };
   "otter-osd" = {
     pin = "otter_osd";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -194,15 +194,15 @@
   };
   "otter-pick" = {
     pin = "otter_pick";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
-    directDeps = [ "otter-render" "otter-tools-core" "otter-wayland" ];
+    directDeps = [ "otter-render" "otter-theme" "otter-tools-core" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
     systemLibraries = [ "wayland-client" ];
   };
   "otter-polkit" = {
     pin = "otter_polkit";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -210,15 +210,15 @@
   };
   "otter-rec" = {
     pin = "otter_rec";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
-    directDeps = [ "otter-desktop" "otter-tools-core" "otter-utils" "otter-wayland" ];
+    directDeps = [ "otter-desktop" "otter-theme" "otter-tools-core" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
     systemLibraries = [ "dl" "egl" "glesv2" "libavcodec" "libavformat" "libavutil" "libdrm" "libswscale" "wayland-client" ];
   };
   "otter-render" = {
     pin = "otter_render";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-geo" "otter-utils" ];
     hasRemoteDeps = true;
@@ -226,15 +226,15 @@
   };
   "otter-screenshot" = {
     pin = "otter_screenshot";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
-    directDeps = [ "otter-render" "otter-wayland" ];
+    directDeps = [ "otter-desktop" "otter-render" "otter-theme" "otter-tools-core" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
     systemLibraries = [ "wayland-client" ];
   };
   "otter-search" = {
     pin = "otter_search";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-tools-core" "otter-utils" ];
     hasRemoteDeps = false;
@@ -242,15 +242,15 @@
   };
   "otter-settings" = {
     pin = "otter_settings";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
-    directDeps = [ "otter-conf" "otter-config-types" "otter-geo" "otter-render" "otter-theme" "otter-tools-core" "otter-ui" "otter-utils" "otter-wayland" ];
+    directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-tools-core" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
     systemLibraries = [ "wayland-client" "xkbcommon" ];
   };
   "otter-shot" = {
     pin = "otter_shot";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-tools-core" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -258,15 +258,15 @@
   };
   "otter-term" = {
     pin = "otter_term";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-vte" "otter-wayland" ];
-    hasRemoteDeps = false;
-    systemLibraries = [ "ghostty-vt" "wayland-client" "xkbcommon" ];
+    hasRemoteDeps = true;
+    systemLibraries = [ "wayland-client" "xkbcommon" ];
   };
   "otter-theme" = {
     pin = "otter_theme";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-geo" "otter-render" "otter-utils" ];
     hasRemoteDeps = false;
@@ -274,7 +274,7 @@
   };
   "otter-theme-gen" = {
     pin = "otter_theme_gen";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-render" "otter-theme" "otter-tools-core" "otter-utils" ];
     hasRemoteDeps = false;
@@ -282,7 +282,7 @@
   };
   "otter-timer" = {
     pin = "otter_timer";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-tools-core" "otter-utils" ];
     hasRemoteDeps = false;
@@ -290,7 +290,7 @@
   };
   "otter-tools-core" = {
     pin = "otter_tools_core";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-utils" ];
     hasRemoteDeps = false;
@@ -298,7 +298,7 @@
   };
   "otter-transcribe" = {
     pin = "otter_transcribe";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -306,15 +306,15 @@
   };
   "otter-ui" = {
     pin = "otter_ui";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-desktop" "otter-geo" "otter-render" "otter-theme" "otter-tools-core" "otter-utils" "otter-vte" "otter-wayland" ];
     hasRemoteDeps = true;
-    systemLibraries = [  ];
+    systemLibraries = [ "fontconfig" "pam" "wayland-client" "xkbcommon" ];
   };
   "otter-utils" = {
     pin = "otter_utils";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [  ];
     hasRemoteDeps = false;
@@ -322,15 +322,15 @@
   };
   "otter-vox" = {
     pin = "otter_vox";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-desktop" "otter-tools-core" "otter-utils" ];
     hasRemoteDeps = false;
-    systemLibraries = [ "dl" "m" "pthread" ];
+    systemLibraries = [  ];
   };
   "otter-vte" = {
     pin = "otter_vte";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-geo" "otter-render" ];
     hasRemoteDeps = false;
@@ -338,7 +338,7 @@
   };
   "otter-wallpaper" = {
     pin = "otter_wallpaper";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-conf" "otter-config-types" "otter-geo" "otter-render" "otter-theme" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;
@@ -346,7 +346,7 @@
   };
   "otter-wayland" = {
     pin = "otter_wayland";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-geo" "otter-render" "otter-utils" ];
     hasRemoteDeps = true;
@@ -354,7 +354,7 @@
   };
   "otter-weather" = {
     pin = "otter_weather";
-    snapshotVersion = "0.11.53";
+    snapshotVersion = "0.11.113";
     minimumZigVersion = "0.16.0";
     directDeps = [ "otter-geo" "otter-render" "otter-theme" "otter-tools-core" "otter-ui" "otter-utils" "otter-wayland" ];
     hasRemoteDeps = false;

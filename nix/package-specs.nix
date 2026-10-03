@@ -7,10 +7,9 @@
     service = true;
     nativeTools = [ "cmake" "shaderc" ];
     extraSystemDeps = [ "spirv-headers" "vulkan-headers" "vulkan-loader" ];
-    zigBuildFlags = [ "-Dembed_model=false" ];
 
-    # Distribution builds keep the GGUF as data rather than embedding a second
-    # copy in the daemon. nix/packages.nix injects the exact b9789 llama.cpp
+    # Upstream no longer embeds the model: the daemon always loads the
+    # external GGUF. nix/packages.nix injects the exact b9789 llama.cpp
     # source; keep the helper from ever updating it in the sandbox.
     postPatch = ''
       substituteInPlace scripts/build-llama-static.sh \
@@ -21,12 +20,13 @@
         --replace-fail '-march=x86-64-v3' '-march=x86-64'
 
       for source in \
-        build.zig \
         src/main.zig \
         src/config.zig \
         ../otter-config-types/src/assist.zig \
         ../otter-config-types/src/root.zig
       do
+        # NB: build.zig is intentionally absent. It installs to prefix-relative
+        # lib/otter-assist/ since 0.11.113, so no FHS rewrite is needed there.
         substituteInPlace "$source" \
           --replace-fail '/usr/lib/otter-assist/' "$out/lib/otter-assist/"
       done
@@ -96,12 +96,6 @@
     tier = "optional";
     service = true;
     runtimeTools = [ "hyprland" ];
-    postPatch = ''
-      # otter-hypr main still uses the pre-CSD namespace, while the coordinated
-      # 0.11.43 theme moved titlebar colors into Theme.csd.
-      substituteInPlace src/draw.zig \
-        --replace-fail 'theme.decorations.' 'theme.csd.'
-    '';
   };
   "otter-idle" = {
     executable = "otter-idle";
@@ -266,7 +260,12 @@
     description = "Local text-to-speech CLI";
     tier = "extras";
     service = false;
-    # Upstream currently hardcodes SSE4.2/F16C/FMA/BMI2/AVX/AVX2 flags.
+    # scripts/build-ggml.sh configures the vendored ggml tree with CMake and
+    # compiles the Vulkan backend, so the ggml toolchain rides along.
+    nativeTools = [ "cmake" "shaderc" ];
+    extraSystemDeps = [ "spirv-headers" "vulkan-headers" "vulkan-loader" ];
+    # Upstream's ggml runtime compiles with -march=x86-64-v3
+    # (scripts/build-ggml.sh), so AVX2-class CPUs are required.
     platforms = [ "x86_64-linux" ];
   };
   "otter-wallpaper" = {
