@@ -18,6 +18,13 @@
     libdrm = { name = "libdrm"; package = pkgs.libdrm; };
     egl = { name = "libglvnd"; package = pkgs.libglvnd; };
     glesv2 = { name = "libglvnd"; package = pkgs.libglvnd; };
+    "EGL" = { name = "EGL"; package = pkgs.libglvnd; };
+    "GL" = { name = "GL"; package = pkgs.libglvnd; };
+    "GLX" = { name = "GLX"; package = pkgs.libglvnd; };
+    vulkan = { name = "vulkan-loader"; package = pkgs.vulkan-loader; };
+    ssh = { name = "libssh"; package = pkgs.libssh; };
+    webp = { name = "libwebp"; package = pkgs.libwebp; };
+    "apt-pkg" = { name = "apt-pkg"; package = pkgs.apt; };
 
   };
 
@@ -25,6 +32,8 @@
     ffmpeg = pkgs.ffmpeg;
     libdrm = pkgs.libdrm;
     libglvnd = pkgs.libglvnd;
+    libX11 = pkgs.xorg.libX11;
+    xorgproto = pkgs.xorg.xorgproto;
     "libghostty-vt" = ghosttyVt;
     "spirv-headers" = pkgs.spirv-headers;
     "vulkan-headers" = pkgs.vulkan-headers;

@@ -912,7 +912,11 @@ def _check_framework() -> None:
             if is_local_reference(value):
                 err.append(f"npins pin contains a local source reference: {pin_name}.{fname}")
 
-    coordinated_repos = sorted(repos - {"otter-hypr", "otter-examples"})
+    # Upstream tags each repository independently; only repositories sharing
+    # the coordinated release train are version-locked together. Branch-tracked
+    # repos (otter-hypr, otter-examples) and the independently versioned
+    # otter-bench (v0.1.x track) are excluded from the single-version rule.
+    coordinated_repos = sorted(repos - {"otter-hypr", "otter-examples", "otter-bench"})
     coordinated_versions: dict[str, list[str]] = {}
     for repo in coordinated_repos:
         pin = pins.get(repo_pins.get(repo, ""))
@@ -1119,6 +1123,21 @@ SOURCE_COMPAT_EXPECTED: dict[str, tuple[str, ...]] = {
         "/usr/share/sounds/freedesktop/stereo/bell.oga",
     ),
     "otter-config-types/src/lock.zig": ("/usr/share/otter-shell/lock/otter-shell.png",),
+    "otter-files/src/file_manager_service.zig": ("/usr/bin/otter-files",),
+    "otter-pkg/src/onboarding.zig": ("/usr/bin/otter-pkg",),
+    "otter-pkg/data/polkit-1/actions/org.otter_shell.otter_pkg.policy": (
+        "/usr/bin/otter-pkg",
+    ),
+    # otter-bench v0.1.x predates the semantic theme roles; the package spec
+    # remaps these anchors. If bench adopts the new API, the remap fails
+    # loudly at build time and these needles go stale alongside it.
+    "otter-bench/apps/desktop/src/app.zig": (
+        "self.theme.fonts.font_family",
+        "self.theme.decorations.prefered_decoration_type",
+    ),
+    "otter-bench/apps/desktop/src/pages/hud.zig": ("theme.surfaces.surface",),
+    "otter-bench/apps/desktop/src/ui/kit.zig": ("theme.spacing.button_border_radius",),
+    "otter-bench/libs/config/src/theme_colors.zig": ("convert(c.critical)",),
     "otter-wayland/build.zig": (
         "const xkbcommon = b.addTranslateC(.{",
         "}).createModule();",
@@ -1414,7 +1433,11 @@ def cmd_audit(args: argparse.Namespace) -> int:
     upstream = sorted(set(upstream_repos))
 
     generated = _repos_from_metadata()
-    ignored = {"otter-zenith"}
+    # Non-Zig upstream repositories never enter the generated graph: the PikaOS
+    # provisioning scripts (otter-gaming-utils), the plugin templates
+    # (otter-plugin-factory), the meta monorepo (otter-shell), and the website
+    # (otter-site). otter-zenith is a retired placeholder.
+    ignored = {"otter-zenith", "otter-gaming-utils", "otter-plugin-factory", "otter-shell", "otter-site"}
     upstream_zig = sorted(set(upstream) - ignored)
 
     new_repos = sorted(set(upstream_zig) - set(generated))

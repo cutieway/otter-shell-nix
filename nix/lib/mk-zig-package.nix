@@ -63,6 +63,10 @@ let
     rm -rf "$ZIG_GLOBAL_CACHE_DIR/p"
     ln -s ${externalDeps} "$ZIG_GLOBAL_CACHE_DIR/p"
   '';
+  # Directory carrying the toolchain's own runtime libraries (libstdc++ for
+  # C++ shims). The compiler driver finds these internally, so they never
+  # appear in NIX_LDFLAGS; seed them for the preFixup library lookup below.
+  toolchainLibDir = "${lib.getLib pkgs.stdenv.cc.cc}/lib";
 in
 pkgs.stdenv.mkDerivation {
   inherit
@@ -97,7 +101,14 @@ pkgs.stdenv.mkDerivation {
   unpackPhase = ''
     runHook preUnpack
     mkdir -p workspace
-    cp -RL --no-preserve=mode,ownership "$src/." workspace/
+    # Some upstreams vendor sysfs fixture trees containing cyclic symlinks
+    # (e.g. otter-bench tests/fixtures/sysfs), which no copy can represent.
+    # GNU cp copies everything else and skips only those links; the fixtures
+    # back `zig build test`, which never runs in a package build, so warn and
+    # continue instead of failing the whole workspace copy. Anything the
+    # build itself needs still fails loudly below.
+    cp -RL --no-preserve=mode,ownership "$src/." workspace/ || \
+      echo "otter-shell-nix: workspace copy skipped unreadable links (see cp errors above)" >&2
     chmod -R u+w workspace
     cd "workspace/${repoDir}"
     sourceRoot="$PWD"
@@ -146,12 +157,26 @@ pkgs.stdenv.mkDerivation {
   # not leak into the closure, and the libraries must ship in $out/lib or
   # the binaries cannot start. Harvest every DT_NEEDED entry that is not
   # already satisfied from the store, then drop the /build RPATH entries.
-  # This runs in preFixup: fixupPhase rejects /build references, so the
-  # rewrite must land before its checks.
+  # System libraries the linker resolved (e.g. libstdc++ for C++ shims)
+  # gain an RPATH entry instead of a copy. This runs in preFixup: fixupPhase
+  # rejects /build references, so the rewrite must land before its checks.
   preFixup = ''
     cacheDir="''${ZIG_LOCAL_CACHE_DIR:-$TMPDIR/zig-local-cache}"
+    # Library directories the linker itself searched, in order: the
+    # toolchain runtimes first, then every -L directory from the build.
+    # NOTE: command substitution strips trailing newlines, so join lines
+    # with a literal newline instead of $(printf '%s\n' ...).
+    link_dirs="${toolchainLibDir}"
+    for flag in ''${NIX_LDFLAGS:-}; do
+      case "$flag" in
+        -L*) link_dirs="$link_dirs
+''${flag#-L}" ;;
+      esac
+    done
     if [ -d "$out/bin" ] && [ -d "$cacheDir" ]; then
       harvested=0
+      sysrpath=0
+      sysrpath_dirs=""
       while IFS= read -r -d "" bin; do
         if ! old_rpath="$(patchelf --print-rpath "$bin" 2>/dev/null)"; then
           continue
@@ -172,6 +197,18 @@ pkgs.stdenv.mkDerivation {
           done <<< "$store_dirs"
           [ "$satisfied" = 1 ] && continue
           [ -e "$out/lib/$needed" ] && continue
+          # System library from the link closure: reference it in place.
+          sysdir=""
+          while IFS= read -r dir; do
+            if [ -n "$dir" ] && [ -e "$dir/$needed" ]; then sysdir="$dir"; break; fi
+          done <<< "$link_dirs"
+          if [ -n "$sysdir" ]; then
+            case ":$sysrpath_dirs:" in
+              *":$sysdir:"*) ;;
+              *) sysrpath_dirs="$sysrpath_dirs:$sysdir"; sysrpath=1 ;;
+            esac
+            continue
+          fi
           hit="$(find "$cacheDir" -name "$needed" 2>/dev/null | sort | head -n 1 || true)"
           if [ -z "$hit" ]; then
             echo "otter-shell-nix: cannot satisfy $bin needs $needed" >&2
@@ -183,16 +220,20 @@ pkgs.stdenv.mkDerivation {
           harvested=1
         done < <(patchelf --print-needed "$bin" 2>/dev/null || true)
       done < <(find "$out/bin" -maxdepth 1 -type f -perm -0100 -print0 2>/dev/null || true)
-      if [ "$harvested" = 1 ]; then
+      if [ "$harvested" = 1 ] || [ "$sysrpath" = 1 ]; then
         while IFS= read -r -d "" elf; do
           if ! old_rpath="$(patchelf --print-rpath "$elf" 2>/dev/null)"; then
             continue
           fi
           new_rpath="$(printf '%s' "$old_rpath" | tr ':' '\n' | { grep -v '^/build' || true; } | tr '\n' ':' | sed 's/:$//')"
-          case ":$new_rpath:" in
+          combined="$new_rpath$sysrpath_dirs"
+          # Never emit a leading empty entry: it means the current directory.
+          combined="''${combined#:}"
+          case ":$combined:" in
             *":$out/lib:"*) ;;
-            *) new_rpath="$new_rpath:$out/lib" ;;
+            *) if [ "$harvested" = 1 ]; then combined="$combined:$out/lib"; fi ;;
           esac
+          new_rpath="$combined"
           if [ "$old_rpath" != "$new_rpath" ]; then
             patchelf --set-rpath "$new_rpath" "$elf"
           fi
